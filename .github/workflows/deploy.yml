@@ -47,11 +47,11 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # FTP cifrado por TLS (puerto 21). Si Donweb diera error de
-          # certificado/TLS, cambia este valor a: ftp
-          protocol: ftps
+          # FTP plano (puerto 21). El canal de datos por FTPS daba ECONNRESET
+          # en Donweb, asi que usamos ftp. CONTRA: el password viaja sin cifrar.
+          # Para reintentar cifrado, probar: ftps-legacy (FTPS implicito, puerto 990).
+          protocol: ftp
           # La barra final es OBLIGATORIA: sube el CONTENIDO de out/, no la carpeta.
           local-dir: web/out/
-          # Carpeta publica en Donweb. Si tu usuario FTP ya entra directo
-          # dentro de public_html, cambia este valor a: ./
+          # Confirmado por el primer deploy: entra correctamente a public_html/.
           server-dir: public_html/
