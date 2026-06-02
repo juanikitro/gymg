@@ -1,0 +1,57 @@
+name: Deploy a Donweb (FTP)
+
+# Despliega automaticamente la landing estatica a Donweb por FTP.
+# Se dispara en cada push a main que toque web/ (o este mismo workflow),
+# y tambien se puede ejecutar a mano desde la pestana "Actions" de GitHub.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+# Evita que dos deploys corran a la vez y corrompan el estado de sync del FTP.
+concurrency:
+  group: deploy-donweb
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repo
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Instalar dependencias
+        working-directory: web
+        run: npm ci
+
+      - name: Build del export estatico (genera web/out/)
+        working-directory: web
+        run: npm run build
+
+      - name: Deploy por FTP a Donweb
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # FTP cifrado por TLS (puerto 21). Si Donweb diera error de
+          # certificado/TLS, cambia este valor a: ftp
+          protocol: ftps
+          # La barra final es OBLIGATORIA: sube el CONTENIDO de out/, no la carpeta.
+          local-dir: web/out/
+          # Carpeta publica en Donweb. Si tu usuario FTP ya entra directo
+          # dentro de public_html, cambia este valor a: ./
+          server-dir: public_html/
