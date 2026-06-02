@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GyMG | Consignataria de Hacienda</title>
+<!-- Google Fonts: EB Garamond (Headlines) & Merriweather (Body) & Inter (Labels) -->
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#e2e0db",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#301400",
+                      "tertiary-container": "#64635f",
+                      "surface-container": "#f0eded",
+                      "secondary-container": "#fdbb8c",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#266a46",
+                      "tertiary-fixed": "#e5e2dd",
+                      "surface-container-highest": "#e4e2e1",
+                      "secondary-fixed-dim": "#fab989",
+                      "on-tertiary-fixed": "#1c1c19",
+                      "on-secondary-fixed-variant": "#683c17",
+                      "outline": "#707971",
+                      "surface-dim": "#dcd9d9",
+                      "inverse-primary": "#90d6a9",
+                      "on-secondary-container": "#784923",
+                      "background": "#fbf9f8",
+                      "on-tertiary-fixed-variant": "#474743",
+                      "tertiary-fixed-dim": "#c9c6c2",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#eae8e7",
+                      "on-primary-fixed-variant": "#025230",
+                      "on-surface-variant": "#404942",
+                      "on-background": "#1b1c1c",
+                      "secondary": "#84532c",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed": "#002110",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#90d6a9",
+                      "primary": "#0a4b2c", /* Slightly deeper green for premium feel */
+                      "tertiary": "#4c4b48",
+                      "surface-bright": "#fbf9f8",
+                      "outline-variant": "#bfc9bf",
+                      "on-surface": "#1b1c1c",
+                      "inverse-on-surface": "#f3f0f0",
+                      "surface-container-low": "#f6f3f2",
+                      "surface-variant": "#e4e2e1",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#acf2c4",
+                      "surface": "#fbf9f8",
+                      "secondary-fixed": "#ffdcc5",
+                      "primary-container": "#1a4d32", /* Darker primary container */
+                      "inverse-surface": "#303030",
+                      "on-primary-container": "#a9efc1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "section-gap-desktop": "160px", /* Increased whitespace */
+                      "container-max-width": "1440px", /* Slightly wider */
+                      "edge-margin-mobile": "24px",
+                      "grid-gutter": "32px",
+                      "section-gap-mobile": "80px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-md": ["Merriweather"],
+                      "headline-md": ["EB Garamond"],
+                      "body-lg": ["Merriweather"],
+                      "display-lg-mobile": ["EB Garamond"],
+                      "display-lg": ["EB Garamond"],
+                      "headline-sm": ["EB Garamond"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-md": ["17px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["42px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                      "display-lg-mobile": ["48px", {"lineHeight": "1.1", "fontWeight": "600"}],
+                      "display-lg": ["72px", {"lineHeight": "1.05", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "headline-sm": ["28px", {"lineHeight": "36px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>body {
+    background-color: #fbf9f8;
+    color: #1b1c1c;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBDsdcPdcU9aUSdUQB1e9nnec5uakTL1s-VHxksKrHKcvLLskNe49MsUfGxJ7lBn7BGvvBFtg54t_nCJ47wMHz-LJgKDWIhPE4zJabmITlVKwNvE7y1k7HVQqRbAV88giEUl_0WZuJr1sYYOZNGsg4_vw-mo8Sr0GcnGLv8ZWC8wqM4YH0aN46uV-sVvSsUWQrtmLdB43VpzGpddwazt08DHsEDgg779gCB239UHvv9koKvNU4As4pYbRGrbM2u8sgnWEbOqm5VYMhC);
+    /* Subtle linen texture */
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+    }
+.border-premium {
+    border: 1px solid #707971
+    }
+.text-shadow-elegant {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
+    }
+.bg-textured {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBXkzQj1BZLHr6REPjvt42Epd1lgyBrRfECGdldMJBrlK_5iFk1BxnZDz7IGPvR649ZlIfv5m74Sq_qhIRtumNUSf3TiMlPaUnLG347WyN_6NF_K6zwdBhG0DBfEypAsXmkDx2DpH7EeVOF7OR-KRhI_xfGoGOfo_we8H04lj1gNmg1ZA_IFCxDEfx8S7rkXzrzJIvlxF9aFJuDPiZjI8YBduxY134PpZmbFjK56iRhtKiMHV6yBFHQKbopg8RafUkPu_r8h1wA6rsu)
+    }
+.cinematic-mask {
+    mask-image: linear-gradient(to right, black 60%, transparent 100%)
+    }
+@media (max-width: 768px) {
+    .cinematic-mask {
+        mask-image: linear-gradient(to bottom, black 70%, transparent 100%)
+        }
+    }</style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 left-0 w-full z-50 bg-background/95 backdrop-blur-md border-b border-outline/20">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center px-edge-margin-mobile md:px-12 h-24">
+<a class="text-headline-sm font-headline-sm font-bold text-primary tracking-tighter flex items-center gap-2" href="#">
+<span class="w-8 h-8 bg-primary rounded-full"></span>
+            GyMG
+        </a>
+<nav class="hidden lg:flex gap-12">
+<a class="text-label-md font-label-md text-primary border-b-2 border-primary pb-1 transition-all duration-200" href="#operaciones">Operaciones</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#zonas">Zonas</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#nosotros">Nosotros</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#contacto">Contacto</a>
+</nav>
+<div class="flex items-center gap-6">
+<a class="hidden sm:inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-3 rounded-none font-label-md tracking-widest uppercase text-xs transition-transform hover:scale-[1.02]" href="https://wa.me/yournumber">
+                WhatsApp
+            </a>
+<button class="lg:hidden text-primary">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="mt-24">
+<!-- Hero Section (Cinematic Split) -->
+<section class="relative min-h-[90vh] flex items-center bg-background">
+<div class="absolute inset-0 grid lg:grid-cols-2">
+<div class="hidden lg:block bg-background"></div>
+<div class="relative overflow-hidden">
+<img alt="Hacienda Argentina" class="w-full h-full object-cover grayscale-[0.2]" src="https://lh3.googleusercontent.com/aida/ADBb0uigR8lOVuLPb7kotsb0Yof1mCG54KNKRMskWGBsQ2c_HOsaepodhbFulZDo6I8dO6j52jOAR_leCwX8wUB71E_ckxZXrpfxpwuq_xF1d4ZYIx0IJzhGpuPLMP7coHbL5SxFziMKugHl4LMau_NU-_P2JhM54gszyy1Dgvnirxv77Vocywn761GcsRjRANndo5qc_S8YcAwXohVBVkhx6Em40WSYvWkqaCPZnwnfcZ8AJNZGRqusWnPbqqMY"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent cinematic-mask lg:block hidden"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent lg:hidden"></div>
+</div>
+</div>
+<div class="relative z-10 max-w-container-max-width mx-auto px-edge-margin-mobile md:px-12 w-full py-20 lg:py-0">
+<div class="lg:max-w-[55%]">
+<div class="flex items-center gap-4 mb-8">
+<span class="w-12 h-px bg-primary"></span>
+<span class="font-label-md text-label-sm uppercase tracking-[0.3em] text-primary">Consignataria de Hacienda</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-background mb-10 leading-[0.95] tracking-tighter">
+                    Trato directo.<br/>
+<span class="italic font-normal">Respaldo familiar.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-xl leading-relaxed">
+                    Operamos gordos, invernada y cría en 25 de Mayo, acompañando al productor con la seriedad de más de 40 años en el mercado ganadero argentino.
+                </p>
+<div class="flex flex-col sm:flex-row gap-6 mb-16">
+<a class="inline-flex justify-center items-center bg-primary text-on-primary px-10 py-5 rounded-none font-label-md text-xs uppercase tracking-widest hover:bg-primary-container transition-all shadow-xl shadow-primary/10" href="#">
+                        Consultar por WhatsApp
+                    </a>
+<a class="inline-flex justify-center items-center border border-outline text-on-background px-10 py-5 rounded-none font-label-md text-xs uppercase tracking-widest hover:bg-on-background hover:text-white transition-all" href="#">
+                        Llamar ahora
+                    </a>
+</div>
+<!-- Integrated Trust Indicators -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-outline/20">
+<div>
+<p class="text-display-lg-mobile font-headline-md text-primary leading-none">+40</p>
+<p class="font-label-sm uppercase tracking-wider text-on-surface-variant mt-1">Años de oficio</p>
+</div>
+<div>
+<p class="text-display-lg-mobile font-headline-md text-primary leading-none">2012</p>
+<p class="font-label-sm uppercase tracking-wider text-on-surface-variant mt-1">Fundación GyMG</p>
+</div>
+<div>
+<p class="text-display-lg-mobile font-headline-md text-primary leading-none">5</p>
+<p class="font-label-sm uppercase tracking-wider text-on-surface-variant mt-1">Provincias</p>
+</div>
+<div>
+<span class="material-symbols-outlined text-4xl text-primary">verified</span>
+<p class="font-label-sm uppercase tracking-wider text-on-surface-variant mt-1">Garantía</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Operations Section (Custom Layout) -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop bg-surface-container-low bg-textured" id="operaciones">
+<div class="max-w-container-max-width mx-auto px-edge-margin-mobile md:px-12">
+<div class="flex flex-col md:flex-row justify-between items-baseline gap-8 mb-24">
+<div class="max-w-3xl">
+<h2 class="font-display-lg text-display-lg-mobile md:text-headline-md text-on-background mb-6">Categorías de Operación</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Especialización en cada etapa del ciclo ganadero para asegurar el mejor valor de mercado.</p>
+</div>
+<div class="h-px flex-grow bg-outline/20 mx-12 hidden md:block"></div>
+</div>
+<div class="space-y-32">
+<!-- Operation 1 -->
+<div class="group flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+<div class="lg:w-1/2 relative">
+<div class="aspect-[16/10] overflow-hidden border-premium">
+<img alt="Gordo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf31ZqF-xwiUC0hxzDEzxtflXxWEV8sNlPct3f9cslmZ8FhaCJEP4FSmIiF1pekrFlzS3m3S18S88Ybt-XX5YWzN3Wp3XieXbp5eFOe-IBlmlWtFhh-QO6gpK-XsXqiUzb4ChPKkbTliKkw_H5LoZ6stlltoKZyYSuez0tSWxRbJ6REfpnHMds0eNm4RkvN-yliCtkL2Dols2hhc27uKqoSM81Vf_BSyyxskqHGPrvgKfsgPEpVk3Gz8qKpVAv3CslZT342oKk5w7T"/>
+</div>
+<div class="absolute -top-8 -left-8 bg-primary text-on-primary px-6 py-4 font-label-md tracking-widest text-xs">CATEGORÍA 01</div>
+</div>
+<div class="lg:w-1/2">
+<h3 class="font-display-lg text-display-lg-mobile md:text-5xl text-on-background mb-8 italic">Gordo</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 leading-relaxed">
+                            Hacienda con destino a faena. Analizamos la disponibilidad y las condiciones del mercado para brindar la mejor oportunidad de cierre tanto para frigoríficos como para productores.
+                        </p>
+<a class="inline-flex items-center gap-4 text-primary font-label-md tracking-widest uppercase text-sm group/btn" href="#">
+<span>Ver condiciones actuales</span>
+<span class="material-symbols-outlined group-hover/btn:translate-x-2 transition-transform">arrow_right_alt</span>
+</a>
+</div>
+</div>
+<!-- Operation 2 (Reversed) -->
+<div class="group flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-24">
+<div class="lg:w-1/2 relative">
+<div class="aspect-[16/10] overflow-hidden border-premium">
+<img alt="Invernada" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEZH8poyRrQhY7RqORaHeYodEaj1B-QhUAcb3bRTTP03Z3ts490sZhEe2vAATKdwMMGH84T84NLYoGJxQG36OyjVmxn_KvWf7bWLVM0SCtI0h3FtKPo-I6BNrqjrTACk8za9A9qZqtqsjRGcYFEYEvBOAF3oiY3BV0Yq13g7fUxBsHQ0200AjdFIXqFwJK3BpOm6iF1MoNCm71k0R8Xs1wYGxgTFLnsBLNuKxw6P-RRG8yQCyPun9_KLzRtJ_hGrjjsiYcTc5nNNPv"/>
+</div>
+<div class="absolute -top-8 -right-8 bg-primary text-on-primary px-6 py-4 font-label-md tracking-widest text-xs">CATEGORÍA 02</div>
+</div>
+<div class="lg:w-1/2">
+<h3 class="font-display-lg text-display-lg-mobile md:text-5xl text-on-background mb-8 italic">Invernada</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 leading-relaxed">
+                            Compra y venta de categorías de recría. Facilitamos el nexo entre criadores e invernadores con un seguimiento riguroso del estado corporal y sanitario de la hacienda.
+                        </p>
+<a class="inline-flex items-center gap-4 text-primary font-label-md tracking-widest uppercase text-sm group/btn" href="#">
+<span>Consultar lotes</span>
+<span class="material-symbols-outlined group-hover/btn:translate-x-2 transition-transform">arrow_right_alt</span>
+</a>
+</div>
+</div>
+<!-- Operation 3 -->
+<div class="group flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+<div class="lg:w-1/2 relative">
+<div class="aspect-[16/10] overflow-hidden border-premium">
+<img alt="Cría" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiZy3_b5dthrTXoGi9vRlkjVAiyUW1WO1XWemTwQqAPFCCthfhQjzGBlO05cIuYI2D0DElSQYRphZKwB_e1VY2JdziFeKALmCqHpSKjklbKYnEUPSCuvIFtGBOLJ1VwR3OoxIh4drWdjuRVR-D7yH_F8wzlD2Tp00mjC2crx6rBkADKpVjBuareuR0w4R7yQHgbhIOeK7ZI9P6Tjrv71nH5DmekcVGppsdeYOpbHjaoNiLnk4pV5PWatURJGWCPrCYL3nmmMNNZVhl"/>
+</div>
+<div class="absolute -top-8 -left-8 bg-primary text-on-primary px-6 py-4 font-label-md tracking-widest text-xs">CATEGORÍA 03</div>
+</div>
+<div class="lg:w-1/2">
+<h3 class="font-display-lg text-display-lg-mobile md:text-5xl text-on-background mb-8 italic">Cría</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 leading-relaxed">
+                            Operaciones vinculadas a vientres, vacas y vaquillonas. Entendemos el valor genético y productivo de los rodeos de cría para asegurar transacciones justas y duraderas.
+                        </p>
+<a class="inline-flex items-center gap-4 text-primary font-label-md tracking-widest uppercase text-sm group/btn" href="#">
+<span>Asesoramiento en vientres</span>
+<span class="material-symbols-outlined group-hover/btn:translate-x-2 transition-transform">arrow_right_alt</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Section (Premium Narrative) -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop bg-background overflow-hidden" id="nosotros">
+<div class="max-w-container-max-width mx-auto px-edge-margin-mobile md:px-12">
+<div class="grid lg:grid-cols-12 gap-20 items-center">
+<div class="lg:col-span-6">
+<div class="relative">
+<div class="aspect-square border-premium overflow-hidden">
+<img alt="Rafael y Germán Gutiérrez" class="w-full h-full object-cover sepia-[0.2]" src="https://lh3.googleusercontent.com/aida/ADBb0ujyWy90XYsllpotWhi54QvL4YS5YSj3gdukQqyJCs7DTkoTxe_8K1einvOAPuGFnrqUYhaJ5FcG5nj_CSx-a_MJR79qCBPT899p_hgC3vjbPVMXY3EysTKgbLaXSV-c8wtmOU2nUMEWQCZ_bJxREyBqQzrL2dgxb5y3Y6VoUmhORv3LorI_DGt0L1He2Vhj55VvkAGbKT6CHURFclDMgacVmn98iZrBfBGfBzTU3ib8EXcswD5CAQZCp6MV"/>
+</div>
+<div class="absolute -bottom-12 -right-12 w-64 h-64 bg-primary/5 -z-10 border border-primary/20"></div>
+<div class="absolute bottom-6 left-6 bg-white p-6 shadow-2xl border border-outline/10 max-w-xs">
+<p class="font-headline-sm italic text-primary">"Nuestro compromiso es la palabra. En el campo, eso es todo."</p>
+<p class="font-label-sm uppercase tracking-widest mt-4 text-on-surface-variant opacity-60">— Rafael &amp; Germán</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-6">
+<span class="font-label-md text-xs uppercase tracking-[0.4em] text-primary mb-6 block">Sobre Nosotros</span>
+<h2 class="font-display-lg text-display-lg-mobile md:text-headline-md text-on-background mb-10 leading-tight">La cercanía como modelo de negocio</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12">
+                        En GyMG no somos solo intermediarios; somos socios estratégicos de cada productor que confía en nosotros. Trabajamos con una estructura ágil que permite decisiones rápidas y soluciones a medida.
+                    </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+<div class="space-y-3">
+<h4 class="font-label-md text-on-background uppercase tracking-widest flex items-center gap-3">
+<span class="w-2 h-2 bg-primary rounded-full"></span> Trato Directo
+                            </h4>
+<p class="text-sm font-body-md text-on-surface-variant">Diálogo constante con los dueños, sin estructuras corporativas lentas.</p>
+</div>
+<div class="space-y-3">
+<h4 class="font-label-md text-on-background uppercase tracking-widest flex items-center gap-3">
+<span class="w-2 h-2 bg-primary rounded-full"></span> Red Federal
+                            </h4>
+<p class="text-sm font-body-md text-on-surface-variant">Conexiones reales en las zonas más productivas de Argentina.</p>
+</div>
+</div>
+<a class="inline-flex justify-center items-center bg-on-background text-white px-12 py-5 rounded-none font-label-md text-xs uppercase tracking-widest hover:bg-primary transition-all" href="#">
+                        Conocer nuestra historia
+                    </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Integrated Process Section -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop bg-surface-container-highest relative overflow-hidden">
+<!-- Abstract Topo Lines Background -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+<svg class="w-full h-full" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,50 Q25,30 50,50 T100,50" fill="none" stroke="currentColor" stroke-width="0.1"></path>
+<path d="M0,60 Q25,40 50,60 T100,60" fill="none" stroke="currentColor" stroke-width="0.1"></path>
+</svg>
+</div>
+<div class="max-w-container-max-width mx-auto px-edge-margin-mobile md:px-12 relative z-10">
+<div class="text-center mb-24">
+<h2 class="font-display-lg text-display-lg-mobile md:text-headline-md text-on-background mb-4 italic">El camino del éxito</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Un proceso artesanal respaldado por tecnología y conocimiento técnico.</p>
+</div>
+<div class="relative">
+<!-- Timeline Line -->
+<div class="absolute top-24 left-0 w-full h-px bg-primary/20 hidden lg:block"></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-16">
+<!-- Step 1 -->
+<div class="relative">
+<div class="w-16 h-16 bg-background border border-primary/30 flex items-center justify-center font-display-lg text-2xl text-primary mb-8 relative z-20">01</div>
+<h4 class="font-label-md text-on-background uppercase tracking-[0.2em] mb-4">Consulta Inicial</h4>
+<p class="font-body-md text-on-surface-variant text-sm leading-relaxed">Análisis profundo de sus objetivos comerciales y necesidades específicas de liquidación o compra.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative">
+<div class="w-16 h-16 bg-background border border-primary/30 flex items-center justify-center font-display-lg text-2xl text-primary mb-8 relative z-20">02</div>
+<h4 class="font-label-md text-on-background uppercase tracking-[0.2em] mb-4">Evaluación Técnica</h4>
+<p class="font-body-md text-on-surface-variant text-sm leading-relaxed">Visita a campo si es necesario, evaluación de categorías, plazos y condiciones de mercado actuales.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative">
+<div class="w-16 h-16 bg-background border border-primary/30 flex items-center justify-center font-display-lg text-2xl text-primary mb-8 relative z-20">03</div>
+<h4 class="font-label-md text-on-background uppercase tracking-[0.2em] mb-4">Gestión de Enlace</h4>
+<p class="font-body-md text-on-surface-variant text-sm leading-relaxed">Activación de nuestra red federal para encontrar la contraparte ideal, priorizando solvencia y agilidad.</p>
+</div>
+<!-- Step 4 -->
+<div class="relative">
+<div class="w-16 h-16 bg-primary text-on-primary flex items-center justify-center font-display-lg text-2xl mb-8 relative z-20">04</div>
+<h4 class="font-label-md text-on-background uppercase tracking-[0.2em] mb-4">Cierre &amp; Cobro</h4>
+<p class="font-body-md text-on-surface-variant text-sm leading-relaxed">Acompañamiento en la carga y liquidación final, asegurando transparencia absoluta en los términos acordados.</p>
+</div>
+</div>
+</div>
+<div class="mt-24 text-center">
+<a class="inline-flex items-center gap-6 group" href="#">
+<span class="w-12 h-12 rounded-full border border-primary flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
+</span>
+<span class="font-label-md uppercase tracking-[0.3em] text-on-background border-b border-primary/20 pb-1">Iniciar una operación hoy</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Zones Section (Map Focused) -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop bg-background" id="zonas">
+<div class="max-w-container-max-width mx-auto px-edge-margin-mobile md:px-12">
+<div class="grid lg:grid-cols-2 gap-24 items-center">
+<div>
+<h2 class="font-display-lg text-display-lg-mobile md:text-5xl text-on-background mb-10 leading-tight">Presencia activa donde nace la producción</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12">
+                        Nuestra base estratégica en 25 de Mayo nos permite una movilidad rápida hacia los principales centros de invernada y cría del país.
+                    </p>
+<div class="space-y-8">
+<div class="flex items-start gap-6 border-l-2 border-primary/20 pl-6 py-2">
+<span class="text-primary font-display-lg text-xl italic">BA</span>
+<div>
+<h4 class="font-label-md text-on-background mb-1">Buenos Aires</h4>
+<p class="text-sm font-body-md text-on-surface-variant">Centro operativo principal y zona de mayor influencia.</p>
+</div>
+</div>
+<div class="flex items-start gap-6 border-l-2 border-primary/20 pl-6 py-2">
+<span class="text-primary font-display-lg text-xl italic">SF</span>
+<div>
+<h4 class="font-label-md text-on-background mb-1">Santa Fe &amp; Córdoba</h4>
+<p class="text-sm font-body-md text-on-surface-variant">Vínculos comerciales consolidados en la zona núcleo.</p>
+</div>
+</div>
+<div class="flex items-start gap-6 border-l-2 border-primary/20 pl-6 py-2">
+<span class="text-primary font-display-lg text-xl italic">LT</span>
+<div>
+<h4 class="font-label-md text-on-background mb-1">Litoral &amp; La Pampa</h4>
+<p class="text-sm font-body-md text-on-surface-variant">Presencia técnica y operativa para invernada de calidad.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative bg-surface-container-low border-premium p-16 overflow-hidden">
+<div class="absolute inset-0 opacity-[0.02] pointer-events-none">
+<div class="w-full h-full" style="background-image: radial-gradient(#0a4b2c 1px, transparent 1px); background-size: 30px 30px;"></div>
+</div>
+<div class="relative z-10 text-center">
+<span class="material-symbols-outlined text-[120px] text-primary/10 mb-8">explore</span>
+<h3 class="font-display-lg text-3xl italic text-primary/80 mb-6">"Donde hay hacienda, estamos nosotros"</h3>
+<p class="font-label-md uppercase tracking-[0.2em] text-on-surface-variant opacity-60 text-xs">Logística Integral y Despacho Nacional</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final Call to Action -->
+<section class="py-32 bg-primary relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 grayscale mix-blend-overlay">
+<img alt="Background CTA" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uigR8lOVuLPb7kotsb0Yof1mCG54KNKRMskWGBsQ2c_HOsaepodhbFulZDo6I8dO6j52jOAR_leCwX8wUB71E_ckxZXrpfxpwuq_xF1d4ZYIx0IJzhGpuPLMP7coHbL5SxFziMKugHl4LMau_NU-_P2JhM54gszyy1Dgvnirxv77Vocywn761GcsRjRANndo5qc_S8YcAwXohVBVkhx6Em40WSYvWkqaCPZnwnfcZ8AJNZGRqusWnPbqqMY"/>
+</div>
+<div class="max-w-container-max-width mx-auto px-edge-margin-mobile md:px-12 text-center relative z-10">
+<h2 class="font-display-lg text-display-lg-mobile md:text-6xl text-on-primary mb-10 leading-tight">Su producción merece<br/><span class="italic font-normal">el mejor trato comercial.</span></h2>
+<p class="font-body-lg text-body-lg text-on-primary/80 mb-16 max-w-3xl mx-auto leading-relaxed">
+                Consultas abiertas para operaciones de gordo, invernada o cría. Obtenga una tasación seria y profesional de sus lotes hoy mismo.
+            </p>
+<div class="flex flex-col sm:flex-row justify-center gap-8">
+<a class="bg-white text-primary px-16 py-6 rounded-none font-label-md uppercase tracking-widest text-xs hover:bg-surface-container transition-all shadow-2xl" href="#">Enviar WhatsApp</a>
+<a class="border border-white/30 text-white px-16 py-6 rounded-none font-label-md uppercase tracking-widest text-xs hover:bg-white/10 transition-all" href="#">Hablar por teléfono</a>
+</div>
+</div>
+</section>
+<!-- Contact & Map Section -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop bg-background" id="contacto">
+<div class="max-w-container-max-width mx-auto px-edge-margin-mobile md:px-12">
+<div class="grid lg:grid-cols-2 gap-0 border border-outline/20">
+<div class="p-16 lg:p-24 bg-white bg-textured">
+<span class="font-label-md text-xs uppercase tracking-[0.4em] text-primary mb-10 block">Contacto</span>
+<h2 class="font-display-lg text-4xl mb-12">Oficinas Centrales</h2>
+<div class="space-y-12">
+<div class="flex gap-8">
+<span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+<div>
+<h4 class="font-label-md text-on-background uppercase tracking-widest mb-2">Ubicación</h4>
+<p class="font-body-md text-on-surface-variant">Calle Principal s/n, 25 de Mayo<br/>Provincia de Buenos Aires, Argentina.</p>
+</div>
+</div>
+<div class="flex gap-8">
+<span class="material-symbols-outlined text-primary text-3xl">person</span>
+<div>
+<h4 class="font-label-md text-on-background uppercase tracking-widest mb-2">Responsables</h4>
+<p class="font-display-lg text-2xl text-on-background italic">Rafael &amp; Germán Gutiérrez</p>
+<p class="font-body-md text-on-surface-variant text-sm mt-1">Socios Fundadores</p>
+</div>
+</div>
+<div class="flex gap-8">
+<span class="material-symbols-outlined text-primary text-3xl">mail</span>
+<div>
+<h4 class="font-label-md text-on-background uppercase tracking-widest mb-2">Canales Digitales</h4>
+<p class="font-body-md text-on-surface-variant">info@gymgconsignataria.com.ar</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative min-h-[500px]">
+<!-- Map Visual -->
+<div class="absolute inset-0 grayscale contrast-125 brightness-90" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJHy3GLKS2cEtkEVEs5uWGIVp0yNORYZn1G-Ntw3YHnbHXpvrhxHGySFsjt-mYQ7GhBHl_KJDqbGL9ymCJPRa2BTr_YlgMm0qvd-motwq8B54F9JDPUXyuxO9HPi0SBSJznHxTK-Lsj18Ai3XVmWTJzQ6a_rSa-5_BUX37qSSbeGYQlRi1QZ3BNWjq3a948krRWllobwHxaejP-wyoaDOEoaTJ_OimD5txsqEVTi61FSBucNVEZwjfc7KwpmKzBA53jJHeMBRqHeiH'); background-size: cover; background-position: center;">
+</div>
+<div class="absolute inset-0 bg-primary/20 mix-blend-color"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border-premium px-10 py-8 shadow-2xl text-center">
+<p class="font-label-md text-primary tracking-widest text-xs mb-2">PUNTO OPERATIVO</p>
+<p class="font-display-lg text-xl italic">25 de Mayo, Bs. As.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="w-full bg-surface-container-highest border-t border-outline/10">
+<div class="max-w-container-max-width mx-auto py-24 px-edge-margin-mobile md:px-12">
+<div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-20">
+<div class="max-w-sm">
+<div class="text-3xl font-display-lg text-primary mb-8 tracking-tighter">GyMG</div>
+<p class="font-body-md text-on-surface-variant text-sm leading-relaxed mb-8">
+                    Consignataria de hacienda dedicada a brindar transparencia y agilidad en el mercado ganadero nacional.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">share</span>
+</a>
+<a class="w-10 h-10 border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">camera</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-16">
+<div>
+<h5 class="font-label-md text-xs uppercase tracking-widest text-primary mb-6">Empresa</h5>
+<nav class="flex flex-col gap-4">
+<a class="text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#nosotros">Nosotros</a>
+<a class="text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#contacto">Contacto</a>
+<a class="text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Valores</a>
+</nav>
+</div>
+<div>
+<h5 class="font-label-md text-xs uppercase tracking-widest text-primary mb-6">Operativa</h5>
+<nav class="flex flex-col gap-4">
+<a class="text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#operaciones">Gordo</a>
+<a class="text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#operaciones">Invernada</a>
+<a class="text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#operaciones">Cría</a>
+</nav>
+</div>
+<div class="col-span-2 sm:col-span-1">
+<h5 class="font-label-md text-xs uppercase tracking-widest text-primary mb-6">Legal</h5>
+<nav class="flex flex-col gap-4">
+<a class="text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Términos</a>
+<a class="text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacidad</a>
+</nav>
+</div>
+</div>
+</div>
+<div class="pt-12 border-t border-outline/10 flex flex-col md:flex-row justify-between items-center gap-8">
+<p class="text-xs font-label-md text-on-surface-variant uppercase tracking-widest italic">
+                "Tradición y seriedad en el mercado de hacienda."
+            </p>
+<div class="text-[11px] font-label-md text-on-surface-variant/60 uppercase tracking-widest">
+                © 2024 GyMG Consignataria. Prohibida su reproducción total o parcial.
+            </div>
+</div>
+</div>
+</footer>
+<script>
+    // Smooth scroll with custom offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Sticky header with elevation effect
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 80) {
+            header.classList.add('shadow-xl', 'bg-background/95');
+        } else {
+            header.classList.remove('shadow-xl');
+        }
+    });
+</script>
+</body></html>

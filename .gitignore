@@ -1,0 +1,13 @@
+# Local Claude settings (machine-specific, not for the repo)
+.claude/settings.local.json
+
+# Safety net — web/ has its own .gitignore for these, but guard the root too
+**/node_modules/
+**/.next/
+**/out/
+*.tsbuildinfo
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
