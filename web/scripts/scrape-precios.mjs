@@ -6,15 +6,17 @@
 //  CI (GitHub Actions) o a mano con `npm run scrape`.
 //
 //  Qué actualiza de forma AUTOMÁTICA y confiable:
+
+//    • INMAG      → tabla HTML dedicada haciinfo000013 (MAG, misma URL base)
+//    • Invernada  → API pública de ROSGAN (api.rosgannet.com.ar/precios_fede)
+//    • Cría       → API pública de ROSGAN (misma URL, tipos[cría])
 //    • Gordo   → tabla HTML del Mercado Agroganadero de Cañuelas (MAG)
 //    • Granos  → pizarra de la Cámara Arbitral de Cereales (BCR Rosario)
 //    • Monedas → dolarapi.com (dólar/euro/real) + open.er-api.com (yen, por cruce)
+
 //
-//  Qué PRESERVA del archivo anterior (no salen del HTML estático):
-//    • Índices INMAG / PIRI / PIRC (se renderizan por JS en sus sitios)
-//    • Invernada y Cría (ROSGAN es una SPA; su API no está expuesta)
-//  → Esos bloques se mantienen con su último valor y su fecha, hasta que se
-//    actualicen a mano o se resuelva una fuente. Nunca quedan vacíos.
+//  Qué PRESERVA del archivo anterior (fuente inestable o protegida):
+//    • Ninguno en modo normal. Si una fuente falla, se conserva el bloque previo.
 //
 //  Resiliencia: cada fuente corre en su propio try/catch. Si una falla, se
 //  conserva el bloque anterior. La variación % se calcula contra el snapshot
@@ -142,6 +144,9 @@ function magFila(html, label) {
   return { min: num(m[1]), max: num(m[2]), prom: num(m[3]) };
 }
 
+// SOURCE: https://www.mercadoagroganadero.com.ar/dll/hacienda2.dll/haciinfo000013 | returns: HTML table with "Indice Arrendamiento" (INMAG)
+const MAG_INMAG_URL = "https://www.mercadoagroganadero.com.ar/dll/hacienda2.dll/haciinfo000013";
+
 async function scrapeGordo(prev) {
   const html = await fetchText(MAG_URL);
   const categorias = [];
@@ -155,8 +160,51 @@ async function scrapeGordo(prev) {
 
   const fecha = fechaTextoAIso(stripHtml(html)) || todayAR();
 
-  // Mantiene el índice del bloque anterior (INMAG no sale del HTML).
-  const indice = prev?.indice ?? undefined;
+  // INMAG: scrapeado directamente desde haciinfo000013 (tabla dedicada al índice).
+  // Recon confirmó que NO existe fila "NOVILLOS Especiales" en haciinfo000002,
+  // por lo que se usa la fuente directa en lugar del proxy de promedio de novillos.
+  let indice = prev?.indice ?? undefined;
+  try {
+    const inmagHtml = await fetchText(MAG_INMAG_URL);
+    // La tabla tiene filas <TR> con 4 columnas: fecha | descripción | día | Indice Arrendamiento.
+    // Se busca el primer valor numérico con formato argentino (7 dígitos con puntos y coma) en la 4ª columna.
+    // Ejemplo de fila: <TD Align="Center">4.089,815</TD>
+    const inmagMatch = inmagHtml.match(
+      /<TR[^>]*>\s*<TD[^>]*>[^<]*<\/TD>\s*<TD[^>]*>[^<]*<\/TD>\s*<TD[^>]*>[^<]*<\/TD>\s*<TD[^>]*Align\s*=\s*["']?Center["']?[^>]*>([\d.]+,\d+)<\/TD>/i
+    );
+    if (inmagMatch) {
+      const inmagVal = num(inmagMatch[1]);
+      if (inmagVal != null) {
+        indice = {
+          sigla: "INMAG",
+          nombre: "Índice Novillo Mercado Agroganadero",
+          valor: inmagVal,
+          unidad: "$/kg",
+          variacion: variacion(inmagVal, prev?.indice?.valor),
+        };
+        console.log(`  ✓ INMAG (haciinfo000013): ${inmagVal}`);
+      }
+    }
+    if (indice === (prev?.indice ?? undefined) || indice === undefined) {
+      // Fallback: intenta proxy con promedio de novillos
+      const novilloLiv = categorias.find((c) => c.nombre === "Novillo liviano");
+      const novelloPes = categorias.find((c) => c.nombre === "Novillo pesado");
+      if (novilloLiv?.prom && novelloPes?.prom && indice === undefined) {
+        const proxyVal = Math.round(((novilloLiv.prom + novelloPes.prom) / 2) * 100) / 100;
+        indice = {
+          sigla: "INMAG",
+          nombre: "Proxy INMAG (promedio novillos MAG)",
+          valor: proxyVal,
+          unidad: "$/kg",
+          variacion: variacion(proxyVal, prev?.indice?.valor),
+        };
+        console.log(`  ~ INMAG proxy (promedio novillos): ${proxyVal}`);
+      }
+    }
+  } catch (e) {
+    console.warn(`  ! INMAG scraping falló (${e.message}). Se conserva el valor anterior.`);
+    indice = prev?.indice ?? undefined;
+  }
 
   console.log(`  ✓ Gordo (MAG): ${categorias.length} categorías · fecha ${fecha}`);
   return {
@@ -170,6 +218,179 @@ async function scrapeGordo(prev) {
     fuenteUrl: "https://www.mercadoagroganadero.com.ar",
     actualizado: fecha,
   };
+}
+
+// ---------------------------------------------------------------------------
+//  Fuente: Invernada (ROSGAN via api.rosgannet.com.ar)
+// ---------------------------------------------------------------------------
+
+// SOURCE: https://api.rosgannet.com.ar/api/db/rosgan/app/public/precios_fede | returns: JSON array con PIRI, PIRC y categorías detalladas por tipo (Invernada / Cría)
+const ROSGAN_PRECIOS_FEDE_URL = "https://api.rosgannet.com.ar/api/db/rosgan/app/public/precios_fede";
+
+// SOURCE: https://api.rosgannet.com.ar/api/db/rosgan/app/public/precios.xml?_limit=1 | returns: JSON {data:[{piri, pirc, fecha_remate, ...}]} — scalar indices solo, sin categorías
+const ROSGAN_PRECIOS_XML_URL = "https://api.rosgannet.com.ar/api/db/rosgan/app/public/precios.xml?_limit=1";
+
+/** Fetch y parsea el registro más reciente de precios_fede (contiene PIRI, PIRC y categorías). */
+async function fetchRosganLatest() {
+  const text = await fetchText(ROSGAN_PRECIOS_FEDE_URL);
+  const json = JSON.parse(text);
+  if (!json?.data?.length) throw new Error("ROSGAN precios_fede: respuesta vacía");
+  // Ordena por anio_remate DESC, mes_remate DESC para obtener el más reciente
+  const sorted = [...json.data].sort((a, b) => {
+    if (b.anio_remate !== a.anio_remate) return b.anio_remate - a.anio_remate;
+    return b.mes_remate - a.mes_remate;
+  });
+  return sorted[0];
+}
+
+async function scrapeInvernada(prev) {
+  let record;
+  try {
+    record = await fetchRosganLatest();
+  } catch (e) {
+    throw new Error(`ROSGAN precios_fede inaccesible: ${e.message}`);
+  }
+
+  const piriVal = record.piri != null ? parseFloat(record.piri) : null;
+  const fecha = record.fecha_remate || todayAR();
+
+  const indice = piriVal != null
+    ? {
+        sigla: "PIRI",
+        nombre: "Precio Índice ROSGAN Invernada",
+        valor: piriVal,
+        unidad: "$/kg",
+        variacion: variacion(piriVal, prev?.indice?.valor),
+      }
+    : (prev?.indice ?? undefined);
+
+  // Categorías de invernada desde tipos[0].categorias (primer tipo = Invernada)
+  // Mapa de títulos en la API -> nombre a mostrar
+  const INV_MAP = {
+    "Terneros":                       "Ternero",
+    "Terneras":                       "Ternera",
+    "Terneros/as":                    "Terneros/as (mixto)",
+    "Novillos 1 a 2 años":            "Novillito",
+    "Novillos 2 a 3 años":            "Novillo",
+    "Vaquillonas de invernada":       "Vaquillona",
+    "Vacas de invernada":             "Vaca de invernada",
+  };
+
+  let categorias = prev?.categorias ?? [];
+  try {
+    const tipos = record.tipos ?? [];
+    // Busca el tipo cuyo título incluya "Invernada" (case-insensitive)
+    const tipoInv = tipos.find((t) => /invernada/i.test(t.titulo ?? "")) ?? tipos[0];
+    if (tipoInv?.categorias?.length) {
+      const parsed = [];
+      for (const cat of tipoInv.categorias) {
+        const precio = cat.precio != null ? parseFloat(cat.precio) : null;
+        if (precio == null || precio === 0) continue;
+        const titulo = (cat.titulo ?? "").trim();
+        const nombre = INV_MAP[titulo] ?? titulo;
+        parsed.push({ nombre, min: null, max: null, prom: precio, variacion: null });
+      }
+      if (parsed.length) categorias = parsed;
+    }
+  } catch (e) {
+    console.warn(`  ! Invernada categorías: ${e.message}. Se conservan las anteriores.`);
+  }
+
+  console.log(`  ✓ Invernada (ROSGAN): PIRI=${piriVal} · ${categorias.length} categorías · fecha ${fecha}`);
+  return {
+    id: "invernada",
+    titulo: "Invernada",
+    subtitulo: "Categorías de recría",
+    unidad: "$/kg vivo",
+    indice,
+    categorias,
+    fuente: "ROSGAN — Mercado Ganadero (último remate)",
+    fuenteUrl: "https://www.rosgan.com.ar/indices",
+    actualizado: fecha,
+  };
+}
+
+// ---------------------------------------------------------------------------
+//  Fuente: Cría (ROSGAN via api.rosgannet.com.ar)
+// ---------------------------------------------------------------------------
+
+async function scrapeCria(prev) {
+  let record;
+  try {
+    record = await fetchRosganLatest();
+  } catch (e) {
+    throw new Error(`ROSGAN precios_fede inaccesible: ${e.message}`);
+  }
+
+  const pircVal = record.pirc != null ? parseFloat(record.pirc) : null;
+  // pirc puede ser 0 cuando no hubo remate de cría ese mes; en ese caso preservar
+  const pircEfectivo = pircVal != null && pircVal > 0 ? pircVal : null;
+  const fecha = record.fecha_remate || todayAR();
+
+  const indice = pircEfectivo != null
+    ? {
+        sigla: "PIRC",
+        nombre: "Precio Índice ROSGAN Cría",
+        valor: pircEfectivo,
+        unidad: "$/unidad",
+        variacion: variacion(pircEfectivo, prev?.indice?.valor),
+      }
+    : (prev?.indice ?? undefined);
+
+  // Categorías de cría desde tipos[1].categorias (segundo tipo = Cría/Vientres)
+  // Mapa de títulos API -> nombre a mostrar
+  const CRIA_MAP = {
+    "Vacas con cría al pie":             "Vaca con cría al pie",
+    "Vientres con garantía de preñez":   "Vaca/vaquillona preñada",
+    "Vientres entorados":                "Vientre entorado",
+    "Vaquillonas para cria":             "Vaquillona para cría",
+  };
+
+  let categorias = prev?.categorias ?? [];
+  let tieneCategorias = false;
+  try {
+    const tipos = record.tipos ?? [];
+    // Busca el tipo cuyo título incluya "Cría" o "Vientre" (case-insensitive)
+    const tipoCria = tipos.find((t) => /cr[ií]a|vientre/i.test(t.titulo ?? "")) ?? tipos[1];
+    if (tipoCria?.categorias?.length) {
+      const parsed = [];
+      for (const cat of tipoCria.categorias) {
+        const precio = cat.precio != null ? parseFloat(cat.precio) : null;
+        if (precio == null || precio === 0) continue;
+        const titulo = (cat.titulo ?? "").trim();
+        const nombre = CRIA_MAP[titulo] ?? titulo;
+        parsed.push({ nombre, min: null, max: null, prom: precio, variacion: null });
+      }
+      if (parsed.length) {
+        categorias = parsed;
+        tieneCategorias = true;
+      }
+    }
+  } catch (e) {
+    console.warn(`  ! Cría categorías: ${e.message}. Se conservan las anteriores.`);
+  }
+
+  console.log(`  ✓ Cría (ROSGAN): PIRC=${pircEfectivo} · ${categorias.length} categorías · fecha ${fecha}`);
+
+  const bloque = {
+    id: "cria",
+    titulo: "Cría",
+    subtitulo: "Vientres y vacas con cría",
+    unidad: "$/unidad",
+    indice,
+    categorias,
+    fuente: "ROSGAN — Mercado Ganadero (último remate)",
+    fuenteUrl: "https://www.rosgan.com.ar/indices",
+    actualizado: fecha,
+  };
+
+  // Si NO se obtuvieron categorías reales, marcar como provisorio (mantiene CTA en UI).
+  // Si SÍ hay categorías, no incluir el campo (lo elimina de la UI).
+  if (!tieneCategorias) {
+    bloque.provisorio = true;
+  }
+
+  return bloque;
 }
 
 // ---------------------------------------------------------------------------
@@ -359,6 +580,22 @@ async function main() {
     console.warn(`  ! Granos falló (${e.message}). Se conserva el valor anterior.`);
   }
 
+  // --- Invernada ---
+  try {
+    const inv = await scrapeInvernada(prevBloque("invernada"));
+    setBloque(aplicarVariacion(inv, prevBloque("invernada")));
+  } catch (e) {
+    console.warn(`  ! Invernada falló (${e.message}). Se conserva el valor anterior.`);
+  }
+
+  // --- Cría ---
+  try {
+    const cria = await scrapeCria(prevBloque("cria"));
+    setBloque(aplicarVariacion(cria, prevBloque("cria")));
+  } catch (e) {
+    console.warn(`  ! Cría falló (${e.message}). Se conserva el valor anterior.`);
+  }
+
   // --- Monedas ---
   try {
     const m = await scrapeMonedas(prevBloque("monedas"));
@@ -367,7 +604,6 @@ async function main() {
     console.warn(`  ! Monedas falló (${e.message}). Se conserva el valor anterior.`);
   }
 
-  // Invernada / Cría: se preservan tal cual venían en `prev` (no se scrapean aún).
 
   if (!bloques.length) {
     console.error("✗ No hay datos para escribir (ni scraping ni snapshot previo). Aborto.");

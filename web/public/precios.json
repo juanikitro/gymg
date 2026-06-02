@@ -9,9 +9,9 @@
       "indice": {
         "sigla": "INMAG",
         "nombre": "Índice Novillo Mercado Agroganadero",
-        "valor": 4074.65,
+        "valor": 4089.815,
         "unidad": "$/kg",
-        "variacion": -3.9
+        "variacion": 0.4
       },
       "categorias": [
         {
@@ -83,36 +83,64 @@
       "indice": {
         "sigla": "PIRI",
         "nombre": "Precio Índice ROSGAN Invernada",
-        "valor": 5522.88,
+        "valor": 5581,
         "unidad": "$/kg",
-        "variacion": 12.7
+        "variacion": 1.1
       },
       "categorias": [
         {
           "nombre": "Ternero",
           "min": null,
           "max": null,
-          "prom": 6269.41,
-          "variacion": null
+          "prom": 6284.77,
+          "variacion": 0.2
         },
         {
           "nombre": "Ternera",
           "min": null,
           "max": null,
-          "prom": 5440.61,
-          "variacion": null
+          "prom": 5856.76,
+          "variacion": 7.6
         },
         {
           "nombre": "Terneros/as (mixto)",
           "min": null,
           "max": null,
-          "prom": 5671.04,
+          "prom": 6055.95,
+          "variacion": 6.8
+        },
+        {
+          "nombre": "Novillito",
+          "min": null,
+          "max": null,
+          "prom": 4842.71,
+          "variacion": null
+        },
+        {
+          "nombre": "Novillo",
+          "min": null,
+          "max": null,
+          "prom": 4380.29,
+          "variacion": null
+        },
+        {
+          "nombre": "Vaquillona",
+          "min": null,
+          "max": null,
+          "prom": 4349.72,
+          "variacion": null
+        },
+        {
+          "nombre": "Vaca de invernada",
+          "min": null,
+          "max": null,
+          "prom": 2817.02,
           "variacion": null
         }
       ],
       "fuente": "ROSGAN — Mercado Ganadero (último remate)",
-      "fuenteUrl": "https://www.rosgan.com.ar",
-      "actualizado": "2026-02-26"
+      "fuenteUrl": "https://www.rosgan.com.ar/indices",
+      "actualizado": "2026-05-27"
     },
     {
       "id": "cria",
@@ -122,15 +150,22 @@
       "indice": {
         "sigla": "PIRC",
         "nombre": "Precio Índice ROSGAN Cría",
-        "valor": 2078292.22,
+        "valor": 2125772.95,
         "unidad": "$/unidad",
-        "variacion": 17.4
+        "variacion": 2.3
       },
-      "categorias": [],
+      "categorias": [
+        {
+          "nombre": "Vaca/vaquillona preñada",
+          "min": null,
+          "max": null,
+          "prom": 2111417.53,
+          "variacion": null
+        }
+      ],
       "fuente": "ROSGAN — Mercado Ganadero (último remate)",
-      "fuenteUrl": "https://www.rosgan.com.ar",
-      "actualizado": "2026-02-26",
-      "provisorio": true
+      "fuenteUrl": "https://www.rosgan.com.ar/indices",
+      "actualizado": "2026-05-27"
     },
     {
       "id": "granos",
