@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-02T21:03:28.329Z",
+  "generado": "2026-06-02T21:10:03.686Z",
   "bloques": [
     {
       "id": "gordo",
@@ -11,7 +11,7 @@
         "nombre": "Índice Novillo Mercado Agroganadero",
         "valor": 4089.815,
         "unidad": "$/kg",
-        "variacion": 0.4
+        "variacion": 0
       },
       "categorias": [
         {
@@ -85,7 +85,7 @@
         "nombre": "Precio Índice ROSGAN Invernada",
         "valor": 5581,
         "unidad": "$/kg",
-        "variacion": 1.1
+        "variacion": 0
       },
       "categorias": [
         {
@@ -93,49 +93,49 @@
           "min": null,
           "max": null,
           "prom": 6284.77,
-          "variacion": 0.2
+          "variacion": 0
         },
         {
           "nombre": "Ternera",
           "min": null,
           "max": null,
           "prom": 5856.76,
-          "variacion": 7.6
+          "variacion": 0
         },
         {
           "nombre": "Terneros/as (mixto)",
           "min": null,
           "max": null,
           "prom": 6055.95,
-          "variacion": 6.8
+          "variacion": 0
         },
         {
           "nombre": "Novillito",
           "min": null,
           "max": null,
           "prom": 4842.71,
-          "variacion": null
+          "variacion": 0
         },
         {
           "nombre": "Novillo",
           "min": null,
           "max": null,
           "prom": 4380.29,
-          "variacion": null
+          "variacion": 0
         },
         {
           "nombre": "Vaquillona",
           "min": null,
           "max": null,
           "prom": 4349.72,
-          "variacion": null
+          "variacion": 0
         },
         {
           "nombre": "Vaca de invernada",
           "min": null,
           "max": null,
           "prom": 2817.02,
-          "variacion": null
+          "variacion": 0
         }
       ],
       "fuente": "ROSGAN — Mercado Ganadero (último remate)",
@@ -152,7 +152,7 @@
         "nombre": "Precio Índice ROSGAN Cría",
         "valor": 2125772.95,
         "unidad": "$/unidad",
-        "variacion": 2.3
+        "variacion": 0
       },
       "categorias": [
         {
@@ -160,7 +160,7 @@
           "min": null,
           "max": null,
           "prom": 2111417.53,
-          "variacion": null
+          "variacion": 0
         }
       ],
       "fuente": "ROSGAN — Mercado Ganadero (último remate)",
