@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-02T19:58:20.642Z",
+  "generado": "2026-06-02T20:58:38.485Z",
   "bloques": [
     {
       "id": "gordo",
@@ -191,7 +191,7 @@
           "prom": 1450,
           "compra": 1400,
           "venta": 1450,
-          "variacion": null
+          "variacion": 0
         },
         {
           "nombre": "Dólar blue",
@@ -200,25 +200,34 @@
           "prom": 1435,
           "compra": 1415,
           "venta": 1435,
-          "variacion": null
+          "variacion": 0
         },
         {
-          "nombre": "Euro",
+          "nombre": "Euro oficial",
           "min": null,
           "max": null,
           "prom": 1660.0291,
           "compra": 1646.0144,
           "venta": 1660.0291,
-          "variacion": null
+          "variacion": 0
+        },
+        {
+          "nombre": "Euro blue",
+          "min": null,
+          "max": null,
+          "prom": 1642.86,
+          "compra": 1619.96,
+          "venta": 1642.86,
+          "variacion": -1.6
         },
         {
           "nombre": "Real",
           "min": null,
           "max": null,
-          "prom": 283.9371,
-          "compra": 283.7697,
-          "venta": 283.9371,
-          "variacion": null
+          "prom": 283.8642,
+          "compra": 283.6968,
+          "venta": 283.8642,
+          "variacion": 0
         },
         {
           "nombre": "Yen",
@@ -227,7 +236,7 @@
           "prom": 9.09,
           "compra": 8.77,
           "venta": 9.09,
-          "variacion": null
+          "variacion": 0
         }
       ],
       "fuente": "dolarapi.com + open.er-api.com",

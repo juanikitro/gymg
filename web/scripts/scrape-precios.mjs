@@ -226,46 +226,68 @@ async function scrapeMonedas(prev) {
   ]);
   const porCasa = (casa) => dolares.find((d) => d.casa === casa);
   const porMoneda = (m) => cotiz.find((c) => c.moneda === m);
-
   const oficial = porCasa("oficial");
-  const categorias = [];
-  const add = (nombre, o) => {
-    if (o && o.venta != null) {
-      categorias.push({
-        nombre,
-        min: null,
-        max: null,
-        prom: o.venta, // la variación se calcula sobre la venta
-        compra: o.compra ?? null,
-        venta: o.venta,
-        variacion: null,
-      });
-    }
-  };
-  add("Dólar oficial", oficial);
-  add("Dólar blue", porCasa("blue"));
-  add("Euro", porMoneda("EUR"));
-  add("Real", porMoneda("BRL"));
+  const blue = porCasa("blue");
+  const eur = porMoneda("EUR");
+  const brl = porMoneda("BRL");
 
-  // Yen: no hay ARS/JPY directo gratis → cruce dólar oficial × (yen por dólar).
+  // Tipo de cambio internacional (para yen y euro blue). Best-effort.
+  let fx = null;
   try {
-    const fx = await fetchJson(ERAPI_USD);
-    const jpyUsd = fx?.rates?.JPY;
-    if (jpyUsd && oficial?.venta) {
-      const venta = round2(oficial.venta / jpyUsd);
-      const compra = oficial.compra ? round2(oficial.compra / jpyUsd) : null;
-      categorias.push({ nombre: "Yen", min: null, max: null, prom: venta, compra, venta, variacion: null });
-    } else {
-      throw new Error("sin tasa JPY o dólar oficial");
-    }
+    fx = await fetchJson(ERAPI_USD);
   } catch (e) {
-    const prevYen = prev?.categorias?.find((c) => c.nombre === "Yen");
-    if (prevYen) {
-      categorias.push(prevYen);
-      console.warn(`  ! Yen: cruce falló (${e.message}); uso último valor conocido.`);
-    } else {
-      console.warn(`  ! Yen: cruce falló (${e.message}); se omite.`);
-    }
+    console.warn(`  ! FX (open.er-api) falló: ${e.message}`);
+  }
+  const jpyPorUsd = fx?.rates?.JPY ?? null; // yenes por dólar (open.er-api, para el yen)
+
+  const cat = (nombre, compra, venta) => ({
+    nombre,
+    min: null,
+    max: null,
+    prom: venta ?? null, // la variación se calcula sobre la venta
+    compra: compra ?? null,
+    venta: venta ?? null,
+    variacion: null,
+  });
+  const prevCat = (nombre) => prev?.categorias?.find((c) => c.nombre === nombre);
+
+  const categorias = [];
+  if (oficial?.venta != null) categorias.push(cat("Dólar oficial", oficial.compra, oficial.venta));
+  if (blue?.venta != null) categorias.push(cat("Dólar blue", blue.compra, blue.venta));
+  if (eur?.venta != null) categorias.push(cat("Euro oficial", eur.compra, eur.venta));
+
+  // Euro blue: no hay cotización directa gratis. Se deriva aplicando el EUR/USD
+  // implícito del oficial (euro oficial ÷ dólar oficial) al dólar blue, para que
+  // quede coherente con el spread blue/oficial del dólar.
+  const ratioEurUsd =
+    eur?.venta != null && oficial?.venta ? eur.venta / oficial.venta : null;
+  if (ratioEurUsd && blue?.venta != null) {
+    categorias.push(
+      cat(
+        "Euro blue",
+        blue.compra != null ? round2(blue.compra * ratioEurUsd) : null,
+        round2(blue.venta * ratioEurUsd)
+      )
+    );
+  } else if (prevCat("Euro blue")) {
+    categorias.push(prevCat("Euro blue"));
+    console.warn("  ! Euro blue: sin datos para derivar; uso último valor conocido.");
+  }
+
+  if (brl?.venta != null) categorias.push(cat("Real", brl.compra, brl.venta));
+
+  // Yen = dólar oficial ÷ (yenes por dólar). No hay ARS/JPY directo gratis.
+  if (jpyPorUsd && oficial?.venta != null) {
+    categorias.push(
+      cat(
+        "Yen",
+        oficial.compra != null ? round2(oficial.compra / jpyPorUsd) : null,
+        round2(oficial.venta / jpyPorUsd)
+      )
+    );
+  } else if (prevCat("Yen")) {
+    categorias.push(prevCat("Yen"));
+    console.warn("  ! Yen: sin FX; uso último valor conocido.");
   }
 
   if (!categorias.length) throw new Error("Monedas: sin datos");

@@ -158,7 +158,8 @@ export const preciosSeed: PreciosData = {
       categorias: [
         { nombre: "Dólar oficial", min: null, max: null, prom: 1450, compra: 1400, venta: 1450, variacion: null },
         { nombre: "Dólar blue", min: null, max: null, prom: 1435, compra: 1415, venta: 1435, variacion: null },
-        { nombre: "Euro", min: null, max: null, prom: 1660.03, compra: 1646.01, venta: 1660.03, variacion: null },
+        { nombre: "Euro oficial", min: null, max: null, prom: 1660.03, compra: 1646.01, venta: 1660.03, variacion: null },
+        { nombre: "Euro blue", min: null, max: null, prom: 1642.86, compra: 1619.96, venta: 1642.86, variacion: null },
         { nombre: "Real", min: null, max: null, prom: 283.94, compra: 283.77, venta: 283.94, variacion: null },
         { nombre: "Yen", min: null, max: null, prom: 9.09, compra: 8.77, venta: 9.09, variacion: null },
       ],
