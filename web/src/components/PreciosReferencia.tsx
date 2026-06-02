@@ -371,7 +371,7 @@ export default function PreciosReferencia() {
                   )}
                 </p>
                 <p className="mt-1 text-on-surface-variant/70">
-                  Valores orientativos de referencia, no vinculantes.
+                  <strong>Valores orientativos de referencia, no vinculantes.</strong>
                 </p>
               </div>
               <a
