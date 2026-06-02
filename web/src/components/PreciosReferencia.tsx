@@ -16,6 +16,17 @@ function money(n: number | null | undefined): string {
   return "$" + nf.format(Math.round(n));
 }
 
+const nfMoneda = new Intl.NumberFormat("es-AR", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
+/** Cotizaciones: 2 decimales para valores chicos (real, yen), enteros para grandes (dólar, euro). */
+function fmtMoneda(n: number | null | undefined): string {
+  if (n == null) return "—";
+  return Math.abs(n) < 1000 ? "$" + nfMoneda.format(n) : "$" + nf.format(Math.round(n));
+}
+
 function fmtFecha(iso: string): string {
   const [y, m, d] = iso.split("-");
   return y && m && d ? `${d}/${m}/${y}` : iso;
@@ -114,7 +125,8 @@ export default function PreciosReferencia() {
   }, []);
 
   const bloque = data.bloques.find((b) => b.id === activeId) ?? data.bloques[0];
-  const rango = bloqueTieneRango(bloque);
+  const esMonedas = bloque.categorias.some((c) => c.venta != null);
+  const rango = !esMonedas && bloqueTieneRango(bloque);
   const indices = data.bloques
     .map((b) => b.indice)
     .filter((i): i is Indice => Boolean(i));
@@ -134,8 +146,8 @@ export default function PreciosReferencia() {
             Precios de referencia
           </h2>
           <p className="font-merriweather text-base leading-[26px] text-on-surface-variant">
-            Cotizaciones orientativas de las principales categorías de hacienda y granos, con su
-            variación. Para operar, consultanos por la categoría que te interesa.
+            Cotizaciones orientativas de las principales categorías de hacienda, granos y monedas,
+            con su variación. Para operar, consultanos por la categoría que te interesa.
           </p>
         </div>
 
@@ -208,21 +220,34 @@ export default function PreciosReferencia() {
               <thead>
                 <tr className="border-y border-outline-variant text-on-surface-variant">
                   <th className="text-left font-inter text-xs font-semibold uppercase tracking-wide px-7 py-3">
-                    {bloque.id === "granos" ? "Producto" : "Categoría"}
+                    {esMonedas ? "Moneda" : bloque.id === "granos" ? "Producto" : "Categoría"}
                   </th>
-                  {rango && (
-                    <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
-                      Mín
-                    </th>
+                  {esMonedas ? (
+                    <>
+                      <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
+                        Compra
+                      </th>
+                      <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
+                        Venta
+                      </th>
+                    </>
+                  ) : (
+                    <>
+                      {rango && (
+                        <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
+                          Mín
+                        </th>
+                      )}
+                      {rango && (
+                        <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
+                          Máx
+                        </th>
+                      )}
+                      <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
+                        {rango ? "Promedio" : "Precio"}
+                      </th>
+                    </>
                   )}
-                  {rango && (
-                    <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
-                      Máx
-                    </th>
-                  )}
-                  <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
-                    {rango ? "Promedio" : "Precio"}
-                  </th>
                   <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide pr-7 pl-3 py-3">
                     Var.
                   </th>
@@ -237,19 +262,32 @@ export default function PreciosReferencia() {
                     <td className="px-7 py-3.5 font-merriweather text-[15px] text-on-background">
                       {c.nombre}
                     </td>
-                    {rango && (
-                      <td className="text-right px-3 py-3.5 font-inter tabular-nums text-on-surface-variant">
-                        {money(c.min)}
-                      </td>
+                    {esMonedas ? (
+                      <>
+                        <td className="text-right px-3 py-3.5 font-inter tabular-nums text-on-surface-variant">
+                          {fmtMoneda(c.compra)}
+                        </td>
+                        <td className="text-right px-3 py-3.5 font-inter tabular-nums font-semibold text-on-background">
+                          {fmtMoneda(c.venta)}
+                        </td>
+                      </>
+                    ) : (
+                      <>
+                        {rango && (
+                          <td className="text-right px-3 py-3.5 font-inter tabular-nums text-on-surface-variant">
+                            {money(c.min)}
+                          </td>
+                        )}
+                        {rango && (
+                          <td className="text-right px-3 py-3.5 font-inter tabular-nums text-on-surface-variant">
+                            {money(c.max)}
+                          </td>
+                        )}
+                        <td className="text-right px-3 py-3.5 font-inter tabular-nums font-semibold text-on-background">
+                          {money(c.prom)}
+                        </td>
+                      </>
                     )}
-                    {rango && (
-                      <td className="text-right px-3 py-3.5 font-inter tabular-nums text-on-surface-variant">
-                        {money(c.max)}
-                      </td>
-                    )}
-                    <td className="text-right px-3 py-3.5 font-inter tabular-nums font-semibold text-on-background">
-                      {money(c.prom)}
-                    </td>
                     <td className="text-right pr-7 pl-3 py-3.5">
                       <Variacion v={c.variacion} />
                     </td>
@@ -264,15 +302,19 @@ export default function PreciosReferencia() {
                 <div key={c.nombre} className="px-5 py-4 flex items-center justify-between gap-3">
                   <div className="min-w-0">
                     <p className="font-merriweather text-[15px] text-on-background">{c.nombre}</p>
-                    {rango && (
+                    {esMonedas ? (
+                      <p className="font-inter text-xs text-on-surface-variant mt-0.5 tabular-nums">
+                        Compra {fmtMoneda(c.compra)}
+                      </p>
+                    ) : rango ? (
                       <p className="font-inter text-xs text-on-surface-variant mt-0.5 tabular-nums">
                         Mín {money(c.min)} · Máx {money(c.max)}
                       </p>
-                    )}
+                    ) : null}
                   </div>
                   <div className="text-right shrink-0">
                     <p className="font-inter text-base font-semibold tabular-nums text-on-background">
-                      {money(c.prom)}
+                      {esMonedas ? fmtMoneda(c.venta) : money(c.prom)}
                     </p>
                     <Variacion v={c.variacion} />
                   </div>
