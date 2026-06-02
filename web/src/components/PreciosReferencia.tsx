@@ -1,13 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-  preciosSeed,
-  type PreciosData,
-  type BloquePrecios,
-  type Indice,
-} from "@/data/precios";
+import { useRef, useState } from "react";
+import { type BloquePrecios, type Indice } from "@/data/precios";
 import { useFadeInUp } from "@/hooks/useFadeInUp";
+import { usePrecios, dolarVenta } from "@/hooks/usePrecios";
+import CalculadoraHacienda from "@/components/CalculadoraHacienda";
 
 const nf = new Intl.NumberFormat("es-AR", { maximumFractionDigits: 0 });
 
@@ -25,6 +22,19 @@ const nfMoneda = new Intl.NumberFormat("es-AR", {
 function fmtMoneda(n: number | null | undefined): string {
   if (n == null) return "—";
   return Math.abs(n) < 1000 ? "$" + nfMoneda.format(n) : "$" + nf.format(Math.round(n));
+}
+
+/** Formatea en dólares: 2 decimales para valores chicos ($/kg), enteros para grandes. */
+function fmtUSD(n: number | null | undefined): string {
+  if (n == null) return "—";
+  const dec = Math.abs(n) < 100 ? 2 : 0;
+  return (
+    "US$ " +
+    new Intl.NumberFormat("es-AR", {
+      minimumFractionDigits: dec,
+      maximumFractionDigits: dec,
+    }).format(n)
+  );
 }
 
 function fmtFecha(iso: string): string {
@@ -97,32 +107,14 @@ function SinInfo({ fuente, fuenteUrl }: { fuente: string; fuenteUrl: string }) {
 }
 
 export default function PreciosReferencia() {
-  const [data, setData] = useState<PreciosData>(preciosSeed);
-  const [activeId, setActiveId] = useState<string>(preciosSeed.bloques[0].id);
+  const data = usePrecios();
+  const [activeId, setActiveId] = useState<string>("gordo");
+  const [usd, setUsd] = useState(false);
 
   const headRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   useFadeInUp(headRef, 0);
   useFadeInUp(bodyRef, 100);
-
-  // En runtime intenta traer el archivo "vivo" que sobrescribe el scraper.
-  // Si falla o es inválido, se queda con el seed compilado (nunca rompe).
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/precios.json", { cache: "no-store" })
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("not ok"))))
-      .then((json: PreciosData) => {
-        if (!cancelled && json && Array.isArray(json.bloques) && json.bloques.length) {
-          setData(json);
-        }
-      })
-      .catch(() => {
-        /* mantiene el seed */
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   const bloque = data.bloques.find((b) => b.id === activeId) ?? data.bloques[0];
   const esMonedas = bloque.categorias.some((c) => c.venta != null);
@@ -130,6 +122,13 @@ export default function PreciosReferencia() {
   const indices = data.bloques
     .map((b) => b.indice)
     .filter((i): i is Indice => Boolean(i));
+
+  // Conversión a USD (al dólar blue scrapeado). No aplica en la pestaña Monedas.
+  const tasaUsd = dolarVenta(data, "blue");
+  const enUsd = usd && !esMonedas && tasaUsd != null;
+  const val = (n: number | null | undefined) =>
+    enUsd && tasaUsd ? fmtUSD(n == null ? null : n / tasaUsd) : money(n);
+  const unidadMostrada = enUsd ? bloque.unidad.replace("$", "US$") : bloque.unidad;
 
   return (
     <section
@@ -170,7 +169,7 @@ export default function PreciosReferencia() {
                     {idx.nombre}
                   </p>
                   <p className="font-garamond text-[28px] leading-none font-medium text-on-background tabular-nums">
-                    {money(idx.valor)}
+                    {val(idx.valor)}
                   </p>
                   <p className="font-inter text-xs text-on-surface-variant mt-1">{idx.unidad}</p>
                 </div>
@@ -178,8 +177,9 @@ export default function PreciosReferencia() {
             </div>
           )}
 
-          {/* Pestañas */}
-          <div className="flex flex-wrap gap-1 border-b border-outline-variant" role="tablist">
+          {/* Pestañas + toggle de moneda */}
+          <div className="flex items-end justify-between gap-3 border-b border-outline-variant">
+            <div className="flex flex-wrap gap-1" role="tablist">
             {data.bloques.map((b) => {
               const active = b.id === activeId;
               return (
@@ -198,6 +198,31 @@ export default function PreciosReferencia() {
                 </button>
               );
             })}
+            </div>
+            {!esMonedas && (
+              <div className="flex shrink-0 mb-2 rounded border border-outline-variant overflow-hidden text-xs font-inter font-semibold">
+                <button
+                  type="button"
+                  onClick={() => setUsd(false)}
+                  aria-pressed={!usd}
+                  className={`px-3 py-1.5 transition-colors ${
+                    !usd ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"
+                  }`}
+                >
+                  ARS
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setUsd(true)}
+                  aria-pressed={usd}
+                  className={`px-3 py-1.5 transition-colors ${
+                    usd ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"
+                  }`}
+                >
+                  US$
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Tabla / tarjetas */}
@@ -207,7 +232,12 @@ export default function PreciosReferencia() {
                 {bloque.subtitulo}
               </h3>
               <span className="font-inter text-xs font-semibold text-on-surface-variant uppercase tracking-wide">
-                {bloque.unidad}
+                {unidadMostrada}
+                {enUsd && tasaUsd != null && (
+                  <span className="ml-1 normal-case font-normal text-on-surface-variant/70">
+                    · dólar blue {money(tasaUsd)}
+                  </span>
+                )}
               </span>
             </div>
 
@@ -275,16 +305,16 @@ export default function PreciosReferencia() {
                       <>
                         {rango && (
                           <td className="text-right px-3 py-3.5 font-inter tabular-nums text-on-surface-variant">
-                            {money(c.min)}
+                            {val(c.min)}
                           </td>
                         )}
                         {rango && (
                           <td className="text-right px-3 py-3.5 font-inter tabular-nums text-on-surface-variant">
-                            {money(c.max)}
+                            {val(c.max)}
                           </td>
                         )}
                         <td className="text-right px-3 py-3.5 font-inter tabular-nums font-semibold text-on-background">
-                          {money(c.prom)}
+                          {val(c.prom)}
                         </td>
                       </>
                     )}
@@ -308,13 +338,13 @@ export default function PreciosReferencia() {
                       </p>
                     ) : rango ? (
                       <p className="font-inter text-xs text-on-surface-variant mt-0.5 tabular-nums">
-                        Mín {money(c.min)} · Máx {money(c.max)}
+                        Mín {val(c.min)} · Máx {val(c.max)}
                       </p>
                     ) : null}
                   </div>
                   <div className="text-right shrink-0">
                     <p className="font-inter text-base font-semibold tabular-nums text-on-background">
-                      {esMonedas ? fmtMoneda(c.venta) : money(c.prom)}
+                      {esMonedas ? fmtMoneda(c.venta) : val(c.prom)}
                     </p>
                     <Variacion v={c.variacion} />
                   </div>
@@ -358,6 +388,8 @@ export default function PreciosReferencia() {
             )}
           </div>
         </div>
+
+        <CalculadoraHacienda />
       </div>
     </section>
   );
