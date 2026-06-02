@@ -82,8 +82,8 @@ export const preciosSeed: PreciosData = {
       categorias: [
         { nombre: "Novillo liviano", min: 3500, max: 4220, prom: 3855.901, variacion: 0 },
         { nombre: "Novillo pesado", min: 2700, max: 4100, prom: 3633.708, variacion: 0 },
-        { nombre: "Novillito", min: 3000, max: 4200, prom: 3790.39, variacion: 0 },
-        { nombre: "Vaquillona", min: 2500, max: 4800, prom: 3766.967, variacion: 0 },
+        { nombre: "Novillito", min: 1700, max: 5340, prom: 4596.957, variacion: 0 },
+        { nombre: "Vaquillona", min: 2500, max: 5400, prom: 4345.666, variacion: 0 },
         { nombre: "Vaca buena", min: 2000, max: 4400, prom: 2914.142, variacion: 0 },
         { nombre: "Vaca regular", min: 1500, max: 3220, prom: 2490.539, variacion: 0 },
         { nombre: "Vaca conserva", min: 1700, max: 2640, prom: 2258.759, variacion: 0 },

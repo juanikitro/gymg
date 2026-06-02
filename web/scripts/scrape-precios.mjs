@@ -132,6 +132,15 @@ const MAG_MAP = [
   { nombre: "Toro", match: "TOROS Buenos" },
 ];
 
+// Fuente secundaria: haciinfo000225 tiene datos correctos para novillito y vaquillona.
+// Columnas: Categoría | Raza (vacío) | Máximo | Mínimo | Promedio | Mediana | ...
+// SOURCE: https://www.mercadoagroganadero.com.ar/dll/hacienda6.dll/haciinfo000225
+const MAG_225_URL = "https://www.mercadoagroganadero.com.ar/dll/hacienda6.dll/haciinfo000225";
+const MAG_225_MAP = [
+  { nombre: "Novillito", match: "NOVILLITOS" },
+  { nombre: "Vaquillona", match: "VAQUILLONAS" },
+];
+
 /** Dada una etiqueta, toma los 3 primeros TD numéricos (mín, máx, promedio). */
 function magFila(html, label) {
   const esc = label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -142,6 +151,23 @@ function magFila(html, label) {
   const m = html.match(re);
   if (!m) return null;
   return { min: num(m[1]), max: num(m[2]), prom: num(m[3]) };
+}
+
+/**
+ * Igual que magFila pero para haciinfo000225, cuyo orden de columnas es
+ * Categoría | Raza (vacío) | Máximo | Mínimo | Promedio | Mediana | ...
+ * El TD de raza puede estar vacío o ausente, por eso es opcional.
+ */
+function magFila225(html, label) {
+  const esc = label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(
+    `${esc}[^<]*</TD>\\s*(?:<TD[^>]*>[^<]*</TD>\\s*)?<TD[^>]*>([\\d.,]+)</TD>\\s*<TD[^>]*>([\\d.,]+)</TD>\\s*<TD[^>]*>([\\d.,]+)</TD>`,
+    "i"
+  );
+  const m = html.match(re);
+  if (!m) return null;
+  // Orden en haciinfo000225: max, min, prom
+  return { max: num(m[1]), min: num(m[2]), prom: num(m[3]) };
 }
 
 // SOURCE: https://www.mercadoagroganadero.com.ar/dll/hacienda2.dll/haciinfo000013 | returns: HTML table with "Indice Arrendamiento" (INMAG)
@@ -157,6 +183,23 @@ async function scrapeGordo(prev) {
     }
   }
   if (!categorias.length) throw new Error("MAG: no se parseó ninguna categoría");
+
+  // Override novillito y vaquillona con datos de haciinfo000225 (fuente más precisa).
+  try {
+    const html225 = await fetchText(MAG_225_URL);
+    for (const c of MAG_225_MAP) {
+      const f = magFila225(html225, c.match);
+      if (f && f.prom != null) {
+        const idx = categorias.findIndex((cat) => cat.nombre === c.nombre);
+        const cat = { nombre: c.nombre, min: f.min, max: f.max, prom: f.prom, variacion: null };
+        if (idx >= 0) categorias[idx] = cat;
+        else categorias.push(cat);
+        console.log(`  ✓ ${c.nombre} (haciinfo000225): min=${f.min} max=${f.max} prom=${f.prom}`);
+      }
+    }
+  } catch (e) {
+    console.warn(`  ! haciinfo000225 falló (${e.message}). Se conservan valores de haciinfo000002.`);
+  }
 
   const fecha = fechaTextoAIso(stripHtml(html)) || todayAR();
 
