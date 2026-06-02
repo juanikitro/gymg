@@ -2,6 +2,7 @@ import TopNavBar from "@/components/TopNavBar";
 import HeroSection from "@/components/HeroSection";
 import TrustBar from "@/components/TrustBar";
 import OperationsSection from "@/components/OperationsSection";
+import PreciosReferencia from "@/components/PreciosReferencia";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import ProcessSection from "@/components/ProcessSection";
 import ZonesSection from "@/components/ZonesSection";
@@ -42,6 +43,7 @@ export default function Home() {
         <HeroSection />
         <TrustBar />
         <OperationsSection />
+        <PreciosReferencia />
         <WhyChooseSection />
         <ProcessSection />
         <ZonesSection />

@@ -1,0 +1,69 @@
+name: Actualizar precios de referencia
+
+# Scrapea Gordo (MAG Cañuelas) + Granos (BCR Rosario), calcula la variación
+# contra el último snapshot y publica web/public/precios.json en Donweb.
+#
+# El sitio es estático y lee /precios.json en el navegador, así que NO hace
+# falta reconstruir ni redeployar todo: alcanza con sobrescribir ese archivo.
+#
+# Secrets (ya configurados para deploy.yml — se reutilizan):
+#   FTP_SERVER · FTP_USERNAME · FTP_PASSWORD
+#
+# Flujo:
+#   1. scrape  → actualiza web/public/precios.json (variación vs lo commiteado)
+#   2. FTP     → sube SOLO precios.json a public_html/ (FTP plano, igual que deploy.yml)
+#   3. commit  → versiona el JSON y deja la línea base para la próxima corrida
+on:
+  push:
+    branches: [main] # corre en cada push a main (deja /precios.json fresco al publicar)
+  schedule:
+    - cron: "0 23 * * 1-5" # 20:00 ART (UTC-3), lunes a viernes (mercados ya cerrados)
+  workflow_dispatch: {}
+
+concurrency:
+  group: precios-update
+  cancel-in-progress: false
+
+permissions:
+  contents: write # para commitear el precios.json actualizado
+
+jobs:
+  actualizar-precios:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repo
+        uses: actions/checkout@v5
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "20"
+
+      # El scraper no tiene dependencias (usa fetch nativo de Node 20).
+      - name: Scrapear precios (actualiza web/public/precios.json)
+        run: node web/scripts/scrape-precios.mjs
+
+      - name: Ver resultado
+        run: head -n 30 web/public/precios.json
+
+      # Sube únicamente precios.json. FTP plano (puerto 21) porque FTPS da
+      # ECONNRESET en Donweb (ver nota en deploy.yml). curl no toca el resto
+      # del sitio ni el state-file de SamKirkland.
+      - name: Publicar precios.json en Donweb (FTP)
+        run: |
+          curl --fail-with-body --silent --show-error \
+            -T web/public/precios.json \
+            --user "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
+            "ftp://${{ secrets.FTP_SERVER }}/public_html/precios.json"
+
+      - name: Versionar el JSON actualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/precios.json
+          if git diff --staged --quiet; then
+            echo "Sin cambios en precios.json — nada para commitear."
+          else
+            git commit -m "chore(precios): actualizar precios de referencia"
+            git push
+          fi

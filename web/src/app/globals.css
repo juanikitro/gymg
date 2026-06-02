@@ -35,6 +35,10 @@
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
 
+  /* Variación de precios: "up" = suba (verde). "down" usa --color-error.
+     Se sobreescribe en dark mode más abajo para mantener contraste. */
+  --color-up: #0c7a40;
+
   --color-surface: #fbf9f8;
   --color-surface-dim: #dcd9d9;
   --color-surface-bright: #fbf9f8;
@@ -98,6 +102,7 @@ html {
     --color-on-surface-variant: #c1c9bc;
     --color-outline: #8b9389;
     --color-outline-variant: #404942;
+    --color-up: #5fd99a;
   }
 }
 
@@ -112,6 +117,7 @@ html {
   --color-on-surface-variant: #c1c9bc;
   --color-outline: #8b9389;
   --color-outline-variant: #404942;
+  --color-up: #5fd99a;
 }
 
 body {
