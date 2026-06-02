@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-02T22:21:32.986Z",
+  "generado": "2026-06-02T22:29:58.469Z",
   "bloques": [
     {
       "id": "gordo",
@@ -33,14 +33,14 @@
           "min": 3000,
           "max": 4200,
           "prom": 3790.39,
-          "variacion": -17.5
+          "variacion": 0
         },
         {
           "nombre": "Vaquillona",
           "min": 2500,
           "max": 4800,
           "prom": 3766.967,
-          "variacion": -13.3
+          "variacion": 0
         },
         {
           "nombre": "Vaca buena",
