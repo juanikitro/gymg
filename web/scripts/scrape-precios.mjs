@@ -8,6 +8,7 @@
 //  Qué actualiza de forma AUTOMÁTICA y confiable:
 //    • Gordo   → tabla HTML del Mercado Agroganadero de Cañuelas (MAG)
 //    • Granos  → pizarra de la Cámara Arbitral de Cereales (BCR Rosario)
+//    • Monedas → dolarapi.com (dólar/euro/real) + open.er-api.com (yen, por cruce)
 //
 //  Qué PRESERVA del archivo anterior (no salen del HTML estático):
 //    • Índices INMAG / PIRI / PIRC (se renderizan por JS en sus sitios)
@@ -48,6 +49,11 @@ async function fetchText(url) {
   } finally {
     clearTimeout(t);
   }
+}
+
+/** GET + JSON.parse, para APIs que devuelven JSON (dolarapi, open.er-api). */
+async function fetchJson(url) {
+  return JSON.parse(await fetchText(url));
 }
 
 /** Parsea un número en formato es-AR ("3.855,90" / "4757,511" / "$465.000"). */
@@ -204,6 +210,102 @@ async function scrapeGranos() {
 }
 
 // ---------------------------------------------------------------------------
+//  Fuente: Monedas (dolarapi.com gratis + cruce para el yen)
+// ---------------------------------------------------------------------------
+
+const DOLARAPI_DOLARES = "https://dolarapi.com/v1/dolares";
+const DOLARAPI_COTIZ = "https://dolarapi.com/v1/cotizaciones";
+const ERAPI_USD = "https://open.er-api.com/v6/latest/USD";
+
+const round2 = (n) => (n == null ? null : Math.round(n * 100) / 100);
+
+async function scrapeMonedas(prev) {
+  const [dolares, cotiz] = await Promise.all([
+    fetchJson(DOLARAPI_DOLARES),
+    fetchJson(DOLARAPI_COTIZ),
+  ]);
+  const porCasa = (casa) => dolares.find((d) => d.casa === casa);
+  const porMoneda = (m) => cotiz.find((c) => c.moneda === m);
+  const oficial = porCasa("oficial");
+  const blue = porCasa("blue");
+  const eur = porMoneda("EUR");
+  const brl = porMoneda("BRL");
+
+  // Tipo de cambio internacional (para yen y euro blue). Best-effort.
+  let fx = null;
+  try {
+    fx = await fetchJson(ERAPI_USD);
+  } catch (e) {
+    console.warn(`  ! FX (open.er-api) falló: ${e.message}`);
+  }
+  const jpyPorUsd = fx?.rates?.JPY ?? null; // yenes por dólar (open.er-api, para el yen)
+
+  const cat = (nombre, compra, venta) => ({
+    nombre,
+    min: null,
+    max: null,
+    prom: venta ?? null, // la variación se calcula sobre la venta
+    compra: compra ?? null,
+    venta: venta ?? null,
+    variacion: null,
+  });
+  const prevCat = (nombre) => prev?.categorias?.find((c) => c.nombre === nombre);
+
+  const categorias = [];
+  if (oficial?.venta != null) categorias.push(cat("Dólar oficial", oficial.compra, oficial.venta));
+  if (blue?.venta != null) categorias.push(cat("Dólar blue", blue.compra, blue.venta));
+  if (eur?.venta != null) categorias.push(cat("Euro oficial", eur.compra, eur.venta));
+
+  // Euro blue: no hay cotización directa gratis. Se deriva aplicando el EUR/USD
+  // implícito del oficial (euro oficial ÷ dólar oficial) al dólar blue, para que
+  // quede coherente con el spread blue/oficial del dólar.
+  const ratioEurUsd =
+    eur?.venta != null && oficial?.venta ? eur.venta / oficial.venta : null;
+  if (ratioEurUsd && blue?.venta != null) {
+    categorias.push(
+      cat(
+        "Euro blue",
+        blue.compra != null ? round2(blue.compra * ratioEurUsd) : null,
+        round2(blue.venta * ratioEurUsd)
+      )
+    );
+  } else if (prevCat("Euro blue")) {
+    categorias.push(prevCat("Euro blue"));
+    console.warn("  ! Euro blue: sin datos para derivar; uso último valor conocido.");
+  }
+
+  if (brl?.venta != null) categorias.push(cat("Real", brl.compra, brl.venta));
+
+  // Yen = dólar oficial ÷ (yenes por dólar). No hay ARS/JPY directo gratis.
+  if (jpyPorUsd && oficial?.venta != null) {
+    categorias.push(
+      cat(
+        "Yen",
+        oficial.compra != null ? round2(oficial.compra / jpyPorUsd) : null,
+        round2(oficial.venta / jpyPorUsd)
+      )
+    );
+  } else if (prevCat("Yen")) {
+    categorias.push(prevCat("Yen"));
+    console.warn("  ! Yen: sin FX; uso último valor conocido.");
+  }
+
+  if (!categorias.length) throw new Error("Monedas: sin datos");
+
+  console.log(`  ✓ Monedas: ${categorias.map((c) => c.nombre).join(", ")}`);
+  return {
+    id: "monedas",
+    titulo: "Monedas",
+    subtitulo: "Cotizaciones de referencia",
+    unidad: "en pesos (ARS)",
+    categorias,
+    fuente: "dolarapi.com + open.er-api.com",
+    fuenteUrl: "https://dolarapi.com",
+    actualizado: todayAR(),
+  };
+}
+
+// ---------------------------------------------------------------------------
 //  Cálculo de variación contra el snapshot anterior
 // ---------------------------------------------------------------------------
 
@@ -257,6 +359,14 @@ async function main() {
     console.warn(`  ! Granos falló (${e.message}). Se conserva el valor anterior.`);
   }
 
+  // --- Monedas ---
+  try {
+    const m = await scrapeMonedas(prevBloque("monedas"));
+    setBloque(aplicarVariacion(m, prevBloque("monedas")));
+  } catch (e) {
+    console.warn(`  ! Monedas falló (${e.message}). Se conserva el valor anterior.`);
+  }
+
   // Invernada / Cría: se preservan tal cual venían en `prev` (no se scrapean aún).
 
   if (!bloques.length) {
@@ -265,7 +375,7 @@ async function main() {
   }
 
   // Ordena las pestañas de forma estable.
-  const orden = ["gordo", "invernada", "cria", "granos"];
+  const orden = ["gordo", "invernada", "cria", "granos", "monedas"];
   bloques.sort((a, b) => orden.indexOf(a.id) - orden.indexOf(b.id));
 
   const data = { generado: new Date().toISOString(), bloques };

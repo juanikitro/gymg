@@ -10,7 +10,7 @@
 //  Si cambiás los tipos, actualizá también el scraper.
 // ============================================================================
 
-export type BloqueId = "gordo" | "invernada" | "cria" | "granos";
+export type BloqueId = "gordo" | "invernada" | "cria" | "granos" | "monedas";
 
 /** Una fila de la tabla: una categoría de hacienda o un grano. */
 export interface CategoriaPrecio {
@@ -23,6 +23,9 @@ export interface CategoriaPrecio {
   prom: number | null;
   /** Variación % vs período anterior (la calcula el scraper). `null` = sin dato. */
   variacion?: number | null;
+  /** Compra / venta para el bloque de monedas. En el resto van ausentes. */
+  compra?: number | null;
+  venta?: number | null;
 }
 
 /** Índice destacado (titular) de un bloque: INMAG / PIRI / PIRC. */
@@ -146,6 +149,23 @@ export const preciosSeed: PreciosData = {
       fuente: "Cámara Arbitral de Cereales — BCR (Rosario)",
       fuenteUrl: "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
       actualizado: "2026-06-01",
+    },
+    {
+      id: "monedas",
+      titulo: "Monedas",
+      subtitulo: "Cotizaciones de referencia",
+      unidad: "en pesos (ARS)",
+      categorias: [
+        { nombre: "Dólar oficial", min: null, max: null, prom: 1450, compra: 1400, venta: 1450, variacion: null },
+        { nombre: "Dólar blue", min: null, max: null, prom: 1435, compra: 1415, venta: 1435, variacion: null },
+        { nombre: "Euro oficial", min: null, max: null, prom: 1660.03, compra: 1646.01, venta: 1660.03, variacion: null },
+        { nombre: "Euro blue", min: null, max: null, prom: 1642.86, compra: 1619.96, venta: 1642.86, variacion: null },
+        { nombre: "Real", min: null, max: null, prom: 283.94, compra: 283.77, venta: 283.94, variacion: null },
+        { nombre: "Yen", min: null, max: null, prom: 9.09, compra: 8.77, venta: 9.09, variacion: null },
+      ],
+      fuente: "dolarapi.com + open.er-api.com",
+      fuenteUrl: "https://dolarapi.com",
+      actualizado: "2026-06-02",
     },
   ],
 };

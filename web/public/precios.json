@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-02T19:38:06.854Z",
+  "generado": "2026-06-02T20:58:38.485Z",
   "bloques": [
     {
       "id": "gordo",
@@ -177,6 +177,71 @@
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
       "fuenteUrl": "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
       "actualizado": "2026-06-01"
+    },
+    {
+      "id": "monedas",
+      "titulo": "Monedas",
+      "subtitulo": "Cotizaciones de referencia",
+      "unidad": "en pesos (ARS)",
+      "categorias": [
+        {
+          "nombre": "Dólar oficial",
+          "min": null,
+          "max": null,
+          "prom": 1450,
+          "compra": 1400,
+          "venta": 1450,
+          "variacion": 0
+        },
+        {
+          "nombre": "Dólar blue",
+          "min": null,
+          "max": null,
+          "prom": 1435,
+          "compra": 1415,
+          "venta": 1435,
+          "variacion": 0
+        },
+        {
+          "nombre": "Euro oficial",
+          "min": null,
+          "max": null,
+          "prom": 1660.0291,
+          "compra": 1646.0144,
+          "venta": 1660.0291,
+          "variacion": 0
+        },
+        {
+          "nombre": "Euro blue",
+          "min": null,
+          "max": null,
+          "prom": 1642.86,
+          "compra": 1619.96,
+          "venta": 1642.86,
+          "variacion": -1.6
+        },
+        {
+          "nombre": "Real",
+          "min": null,
+          "max": null,
+          "prom": 283.8642,
+          "compra": 283.6968,
+          "venta": 283.8642,
+          "variacion": 0
+        },
+        {
+          "nombre": "Yen",
+          "min": null,
+          "max": null,
+          "prom": 9.09,
+          "compra": 8.77,
+          "venta": 9.09,
+          "variacion": 0
+        }
+      ],
+      "fuente": "dolarapi.com + open.er-api.com",
+      "fuenteUrl": "https://dolarapi.com",
+      "actualizado": "2026-06-02"
     }
   ]
 }
