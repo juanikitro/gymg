@@ -8,6 +8,7 @@
 //  Qué actualiza de forma AUTOMÁTICA y confiable:
 //    • Gordo   → tabla HTML del Mercado Agroganadero de Cañuelas (MAG)
 //    • Granos  → pizarra de la Cámara Arbitral de Cereales (BCR Rosario)
+//    • Monedas → dolarapi.com (dólar/euro/real) + open.er-api.com (yen, por cruce)
 //
 //  Qué PRESERVA del archivo anterior (no salen del HTML estático):
 //    • Índices INMAG / PIRI / PIRC (se renderizan por JS en sus sitios)
@@ -48,6 +49,11 @@ async function fetchText(url) {
   } finally {
     clearTimeout(t);
   }
+}
+
+/** GET + JSON.parse, para APIs que devuelven JSON (dolarapi, open.er-api). */
+async function fetchJson(url) {
+  return JSON.parse(await fetchText(url));
 }
 
 /** Parsea un número en formato es-AR ("3.855,90" / "4757,511" / "$465.000"). */
@@ -204,6 +210,80 @@ async function scrapeGranos() {
 }
 
 // ---------------------------------------------------------------------------
+//  Fuente: Monedas (dolarapi.com gratis + cruce para el yen)
+// ---------------------------------------------------------------------------
+
+const DOLARAPI_DOLARES = "https://dolarapi.com/v1/dolares";
+const DOLARAPI_COTIZ = "https://dolarapi.com/v1/cotizaciones";
+const ERAPI_USD = "https://open.er-api.com/v6/latest/USD";
+
+const round2 = (n) => (n == null ? null : Math.round(n * 100) / 100);
+
+async function scrapeMonedas(prev) {
+  const [dolares, cotiz] = await Promise.all([
+    fetchJson(DOLARAPI_DOLARES),
+    fetchJson(DOLARAPI_COTIZ),
+  ]);
+  const porCasa = (casa) => dolares.find((d) => d.casa === casa);
+  const porMoneda = (m) => cotiz.find((c) => c.moneda === m);
+
+  const oficial = porCasa("oficial");
+  const categorias = [];
+  const add = (nombre, o) => {
+    if (o && o.venta != null) {
+      categorias.push({
+        nombre,
+        min: null,
+        max: null,
+        prom: o.venta, // la variación se calcula sobre la venta
+        compra: o.compra ?? null,
+        venta: o.venta,
+        variacion: null,
+      });
+    }
+  };
+  add("Dólar oficial", oficial);
+  add("Dólar blue", porCasa("blue"));
+  add("Euro", porMoneda("EUR"));
+  add("Real", porMoneda("BRL"));
+
+  // Yen: no hay ARS/JPY directo gratis → cruce dólar oficial × (yen por dólar).
+  try {
+    const fx = await fetchJson(ERAPI_USD);
+    const jpyUsd = fx?.rates?.JPY;
+    if (jpyUsd && oficial?.venta) {
+      const venta = round2(oficial.venta / jpyUsd);
+      const compra = oficial.compra ? round2(oficial.compra / jpyUsd) : null;
+      categorias.push({ nombre: "Yen", min: null, max: null, prom: venta, compra, venta, variacion: null });
+    } else {
+      throw new Error("sin tasa JPY o dólar oficial");
+    }
+  } catch (e) {
+    const prevYen = prev?.categorias?.find((c) => c.nombre === "Yen");
+    if (prevYen) {
+      categorias.push(prevYen);
+      console.warn(`  ! Yen: cruce falló (${e.message}); uso último valor conocido.`);
+    } else {
+      console.warn(`  ! Yen: cruce falló (${e.message}); se omite.`);
+    }
+  }
+
+  if (!categorias.length) throw new Error("Monedas: sin datos");
+
+  console.log(`  ✓ Monedas: ${categorias.map((c) => c.nombre).join(", ")}`);
+  return {
+    id: "monedas",
+    titulo: "Monedas",
+    subtitulo: "Cotizaciones de referencia",
+    unidad: "en pesos (ARS)",
+    categorias,
+    fuente: "dolarapi.com + open.er-api.com",
+    fuenteUrl: "https://dolarapi.com",
+    actualizado: todayAR(),
+  };
+}
+
+// ---------------------------------------------------------------------------
 //  Cálculo de variación contra el snapshot anterior
 // ---------------------------------------------------------------------------
 
@@ -257,6 +337,14 @@ async function main() {
     console.warn(`  ! Granos falló (${e.message}). Se conserva el valor anterior.`);
   }
 
+  // --- Monedas ---
+  try {
+    const m = await scrapeMonedas(prevBloque("monedas"));
+    setBloque(aplicarVariacion(m, prevBloque("monedas")));
+  } catch (e) {
+    console.warn(`  ! Monedas falló (${e.message}). Se conserva el valor anterior.`);
+  }
+
   // Invernada / Cría: se preservan tal cual venían en `prev` (no se scrapean aún).
 
   if (!bloques.length) {
@@ -265,7 +353,7 @@ async function main() {
   }
 
   // Ordena las pestañas de forma estable.
-  const orden = ["gordo", "invernada", "cria", "granos"];
+  const orden = ["gordo", "invernada", "cria", "granos", "monedas"];
   bloques.sort((a, b) => orden.indexOf(a.id) - orden.indexOf(b.id));
 
   const data = { generado: new Date().toISOString(), bloques };
