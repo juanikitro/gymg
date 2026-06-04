@@ -122,14 +122,27 @@ const MAG_URL = "https://www.mercadoagroganadero.com.ar/dll/hacienda1.dll/haciin
 
 // Etiqueta exacta en la tabla del MAG -> nombre que mostramos.
 const MAG_MAP = [
-  { nombre: "Novillo liviano", match: "NOVILLOS Regulares Liv" },
-  { nombre: "Novillo pesado", match: "NOVILLOS Regulares Pes" },
-  { nombre: "Novillito", match: "NOVILLITOS Regulares" },
-  { nombre: "Vaquillona", match: "VAQUILLONAS Regulares" },
-  { nombre: "Vaca buena", match: "VACAS Buenas" },
-  { nombre: "Vaca regular", match: "VACAS Regulares" },
-  { nombre: "Vaca conserva", match: "VACAS Conserva Buena" },
-  { nombre: "Toro", match: "TOROS Buenos" },
+  { nombre: "Novillo EyB 431-460",      match: "NOVILLOS Mest.EyB 431/460" },
+  { nombre: "Novillo EyB 461-490",      match: "NOVILLOS Mest.EyB 461/490" },
+  { nombre: "Novillo EyB 491-520",      match: "NOVILLOS Mest.EyB 491/520" },
+  { nombre: "Novillo EyB +520",         match: "NOVILLOS Mest.EyB + 520" },
+  { nombre: "Novillo liviano",          match: "NOVILLOS Regulares Liv" },
+  { nombre: "Novillo pesado",           match: "NOVILLOS Regulares Pes" },
+  { nombre: "Novillo overo",            match: "NOVILLOS Overos N" },
+  { nombre: "Novillito EyB liviano",    match: "NOVILLITOS EyB M. 300/390" },
+  { nombre: "Novillito EyB pesado",     match: "NOVILLITOS EyB P. 391/430" },
+  { nombre: "Novillito",               match: "NOVILLITOS Regulares" },
+  { nombre: "Vaquillona EyB liviana",   match: "VAQUILLONAS EyB M.270/390" },
+  { nombre: "Vaquillona EyB pesada",    match: "VAQUILLONAS EyB P.391/430" },
+  { nombre: "Vaquillona",              match: "VAQUILLONAS Regulares" },
+  { nombre: "Vaca buena",              match: "VACAS Buenas" },
+  { nombre: "Vaca regular",            match: "VACAS Regulares" },
+  { nombre: "Vaca conserva",           match: "VACAS Conserva Buena" },
+  { nombre: "Vaca conserva inferior",  match: "VACAS Conserva Inferior" },
+  { nombre: "Toro",                    match: "TOROS Buenos" },
+  { nombre: "Toro regular",            match: "TOROS Regulares" },
+  { nombre: "MEJ EyB",                 match: "MEJ EyB" },
+  { nombre: "MEJ regular",             match: "MEJ Regulares" },
 ];
 
 // Fuente secundaria: haciinfo000225 tiene datos correctos para novillito y vaquillona.
