@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-03T00:24:09.697Z",
+  "generado": "2026-06-04T00:26:21.124Z",
   "bloques": [
     {
       "id": "gordo",
@@ -9,71 +9,71 @@
       "indice": {
         "sigla": "INMAG",
         "nombre": "Índice Novillo Mercado Agroganadero",
-        "valor": 4089.815,
+        "valor": 4067.333,
         "unidad": "$/kg",
-        "variacion": 0
+        "variacion": -0.5
       },
       "categorias": [
         {
           "nombre": "Novillo liviano",
-          "min": 3500,
-          "max": 4220,
-          "prom": 3855.901,
-          "variacion": 0
+          "min": 3800,
+          "max": 4300,
+          "prom": 3949.63,
+          "variacion": 2.4
         },
         {
           "nombre": "Novillo pesado",
-          "min": 2700,
-          "max": 4100,
-          "prom": 3633.708,
-          "variacion": 0
+          "min": 3700,
+          "max": 4200,
+          "prom": 3735.116,
+          "variacion": 2.8
         },
         {
           "nombre": "Novillito",
-          "min": 3000,
-          "max": 4200,
-          "prom": 3790.39,
-          "variacion": 0
+          "min": 2300,
+          "max": 4100,
+          "prom": 3472.029,
+          "variacion": -8.4
         },
         {
           "nombre": "Vaquillona",
-          "min": 2500,
-          "max": 4800,
-          "prom": 3766.967,
-          "variacion": 0
+          "min": 2600,
+          "max": 4000,
+          "prom": 3496.14,
+          "variacion": -7.2
         },
         {
           "nombre": "Vaca buena",
-          "min": 2000,
-          "max": 4400,
-          "prom": 2914.142,
-          "variacion": 0
+          "min": 1600,
+          "max": 4200,
+          "prom": 2851.321,
+          "variacion": -2.2
         },
         {
           "nombre": "Vaca regular",
           "min": 1500,
-          "max": 3220,
-          "prom": 2490.539,
-          "variacion": 0
+          "max": 4800,
+          "prom": 2462.613,
+          "variacion": -1.1
         },
         {
           "nombre": "Vaca conserva",
-          "min": 1700,
-          "max": 2640,
-          "prom": 2258.759,
+          "min": 1900,
+          "max": 2600,
+          "prom": 2259.28,
           "variacion": 0
         },
         {
           "nombre": "Toro",
-          "min": 2500,
-          "max": 3350,
-          "prom": 2904.079,
-          "variacion": 0
+          "min": 1900,
+          "max": 3400,
+          "prom": 2766.31,
+          "variacion": -4.7
         }
       ],
       "fuente": "Mercado Agroganadero de Cañuelas (MAG)",
       "fuenteUrl": "https://www.mercadoagroganadero.com.ar",
-      "actualizado": "2026-06-02"
+      "actualizado": "2026-06-03"
     },
     {
       "id": "invernada",
@@ -223,60 +223,60 @@
           "nombre": "Dólar oficial",
           "min": null,
           "max": null,
-          "prom": 1450,
-          "compra": 1400,
-          "venta": 1450,
-          "variacion": 0
+          "prom": 1460,
+          "compra": 1410,
+          "venta": 1460,
+          "variacion": 0.7
         },
         {
           "nombre": "Dólar blue",
           "min": null,
           "max": null,
-          "prom": 1435,
-          "compra": 1415,
-          "venta": 1435,
-          "variacion": 0
+          "prom": 1430,
+          "compra": 1410,
+          "venta": 1430,
+          "variacion": -0.3
         },
         {
           "nombre": "Euro oficial",
           "min": null,
           "max": null,
-          "prom": 1660.0291,
-          "compra": 1646.0144,
-          "venta": 1660.0291,
-          "variacion": 0
+          "prom": 1670.2424,
+          "compra": 1656.2187,
+          "venta": 1670.2424,
+          "variacion": 0.6
         },
         {
           "nombre": "Euro blue",
           "min": null,
           "max": null,
-          "prom": 1642.86,
-          "compra": 1619.96,
-          "venta": 1642.86,
-          "variacion": 0
+          "prom": 1635.92,
+          "compra": 1613.04,
+          "venta": 1635.92,
+          "variacion": -0.4
         },
         {
           "nombre": "Real",
           "min": null,
           "max": null,
-          "prom": 283.8642,
-          "compra": 283.6968,
-          "venta": 283.8642,
-          "variacion": 0
+          "prom": 282.8981,
+          "compra": 282.7333,
+          "venta": 282.8981,
+          "variacion": -0.3
         },
         {
           "nombre": "Yen",
           "min": null,
           "max": null,
-          "prom": 9.09,
-          "compra": 8.77,
-          "venta": 9.09,
-          "variacion": 0
+          "prom": 9.13,
+          "compra": 8.82,
+          "venta": 9.13,
+          "variacion": 0.4
         }
       ],
       "fuente": "dolarapi.com + open.er-api.com",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-06-02"
+      "actualizado": "2026-06-03"
     }
   ]
 }
