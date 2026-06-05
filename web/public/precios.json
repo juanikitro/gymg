@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-04T17:15:55.362Z",
+  "generado": "2026-06-05T00:00:21.517Z",
   "bloques": [
     {
       "id": "gordo",
@@ -276,28 +276,28 @@
           "min": null,
           "max": null,
           "prom": 257310,
-          "variacion": 0.6
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
           "prom": 306000,
-          "variacion": 0.9
+          "variacion": 0
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
           "prom": 600390,
-          "variacion": 0.9
+          "variacion": 0
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
           "prom": 278750,
-          "variacion": 1.4
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -314,10 +314,10 @@
           "nombre": "Dólar oficial",
           "min": null,
           "max": null,
-          "prom": 1460,
-          "compra": 1410,
-          "venta": 1460,
-          "variacion": 0
+          "prom": 1455,
+          "compra": 1405,
+          "venta": 1455,
+          "variacion": -0.3
         },
         {
           "nombre": "Dólar blue",
@@ -326,43 +326,43 @@
           "prom": 1435,
           "compra": 1415,
           "venta": 1435,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Euro oficial",
           "min": null,
           "max": null,
-          "prom": 1670.2424,
-          "compra": 1656.2187,
-          "venta": 1670.2424,
-          "variacion": 0
+          "prom": 1671.3678,
+          "compra": 1657.3275,
+          "venta": 1671.3678,
+          "variacion": 0.1
         },
         {
           "nombre": "Euro blue",
           "min": null,
           "max": null,
-          "prom": 1641.64,
-          "compra": 1618.76,
-          "venta": 1641.64,
-          "variacion": 0.3
+          "prom": 1648.39,
+          "compra": 1625.42,
+          "venta": 1648.39,
+          "variacion": 0.4
         },
         {
           "nombre": "Real",
           "min": null,
           "max": null,
-          "prom": 283.1798,
-          "compra": 283.0146,
-          "venta": 283.1798,
-          "variacion": 0.1
+          "prom": 283.8154,
+          "compra": 283.6492,
+          "venta": 283.8154,
+          "variacion": 0.2
         },
         {
           "nombre": "Yen",
           "min": null,
           "max": null,
-          "prom": 9.13,
-          "compra": 8.82,
-          "venta": 9.13,
-          "variacion": 0
+          "prom": 9.1,
+          "compra": 8.78,
+          "venta": 9.1,
+          "variacion": -0.3
         }
       ],
       "fuente": "dolarapi.com + open.er-api.com",
