@@ -12,7 +12,7 @@
 //    • Cría       → API pública de ROSGAN (misma URL, tipos[cría])
 //    • Gordo   → tabla HTML del Mercado Agroganadero de Cañuelas (MAG)
 //    • Granos  → pizarra de la Cámara Arbitral de Cereales (BCR Rosario)
-//    • Monedas → dolarapi.com (dólar/euro/real) + open.er-api.com (yen, por cruce)
+//    • Monedas → dolarapi.com (dólar/euro/real, sólo cotización de venta)
 
 //
 //  Qué PRESERVA del archivo anterior (fuente inestable o protegida):
@@ -487,12 +487,11 @@ async function scrapeGranos() {
 }
 
 // ---------------------------------------------------------------------------
-//  Fuente: Monedas (dolarapi.com gratis + cruce para el yen)
+//  Fuente: Monedas (dolarapi.com gratis — sólo cotización de venta)
 // ---------------------------------------------------------------------------
 
 const DOLARAPI_DOLARES = "https://dolarapi.com/v1/dolares";
 const DOLARAPI_COTIZ = "https://dolarapi.com/v1/cotizaciones";
-const ERAPI_USD = "https://open.er-api.com/v6/latest/USD";
 
 const round2 = (n) => (n == null ? null : Math.round(n * 100) / 100);
 
@@ -508,30 +507,20 @@ async function scrapeMonedas(prev) {
   const eur = porMoneda("EUR");
   const brl = porMoneda("BRL");
 
-  // Tipo de cambio internacional (para yen y euro blue). Best-effort.
-  let fx = null;
-  try {
-    fx = await fetchJson(ERAPI_USD);
-  } catch (e) {
-    console.warn(`  ! FX (open.er-api) falló: ${e.message}`);
-  }
-  const jpyPorUsd = fx?.rates?.JPY ?? null; // yenes por dólar (open.er-api, para el yen)
-
-  const cat = (nombre, compra, venta) => ({
+  const cat = (nombre, venta) => ({
     nombre,
     min: null,
     max: null,
-    prom: venta ?? null, // la variación se calcula sobre la venta
-    compra: compra ?? null,
+    prom: venta ?? null,
     venta: venta ?? null,
     variacion: null,
   });
   const prevCat = (nombre) => prev?.categorias?.find((c) => c.nombre === nombre);
 
   const categorias = [];
-  if (oficial?.venta != null) categorias.push(cat("Dólar oficial", oficial.compra, oficial.venta));
-  if (blue?.venta != null) categorias.push(cat("Dólar blue", blue.compra, blue.venta));
-  if (eur?.venta != null) categorias.push(cat("Euro oficial", eur.compra, eur.venta));
+  if (oficial?.venta != null) categorias.push(cat("Dólar oficial", oficial.venta));
+  if (blue?.venta != null) categorias.push(cat("Dólar blue", blue.venta));
+  if (eur?.venta != null) categorias.push(cat("Euro oficial", eur.venta));
 
   // Euro blue: no hay cotización directa gratis. Se deriva aplicando el EUR/USD
   // implícito del oficial (euro oficial ÷ dólar oficial) al dólar blue, para que
@@ -539,33 +528,13 @@ async function scrapeMonedas(prev) {
   const ratioEurUsd =
     eur?.venta != null && oficial?.venta ? eur.venta / oficial.venta : null;
   if (ratioEurUsd && blue?.venta != null) {
-    categorias.push(
-      cat(
-        "Euro blue",
-        blue.compra != null ? round2(blue.compra * ratioEurUsd) : null,
-        round2(blue.venta * ratioEurUsd)
-      )
-    );
+    categorias.push(cat("Euro blue", round2(blue.venta * ratioEurUsd)));
   } else if (prevCat("Euro blue")) {
     categorias.push(prevCat("Euro blue"));
     console.warn("  ! Euro blue: sin datos para derivar; uso último valor conocido.");
   }
 
-  if (brl?.venta != null) categorias.push(cat("Real", brl.compra, brl.venta));
-
-  // Yen = dólar oficial ÷ (yenes por dólar). No hay ARS/JPY directo gratis.
-  if (jpyPorUsd && oficial?.venta != null) {
-    categorias.push(
-      cat(
-        "Yen",
-        oficial.compra != null ? round2(oficial.compra / jpyPorUsd) : null,
-        round2(oficial.venta / jpyPorUsd)
-      )
-    );
-  } else if (prevCat("Yen")) {
-    categorias.push(prevCat("Yen"));
-    console.warn("  ! Yen: sin FX; uso último valor conocido.");
-  }
+  if (brl?.venta != null) categorias.push(cat("Real", brl.venta));
 
   if (!categorias.length) throw new Error("Monedas: sin datos");
 
@@ -576,7 +545,7 @@ async function scrapeMonedas(prev) {
     subtitulo: "Cotizaciones de referencia",
     unidad: "en pesos (ARS)",
     categorias,
-    fuente: "dolarapi.com + open.er-api.com",
+    fuente: "dolarapi.com",
     fuenteUrl: "https://dolarapi.com",
     actualizado: todayAR(),
   };
