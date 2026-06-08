@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-06T00:00:53.773Z",
+  "generado": "2026-06-08T14:55:49.502Z",
   "bloques": [
     {
       "id": "gordo",
@@ -262,40 +262,40 @@
           "min": null,
           "max": null,
           "prom": 455000,
-          "variacion": -2.2
+          "variacion": 0
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
-          "prom": 255500,
-          "variacion": -0.7
+          "prom": 254800,
+          "variacion": -0.3
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
-          "prom": 304000,
-          "variacion": -0.7
+          "prom": 295000,
+          "variacion": -3
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
-          "prom": 600000,
-          "variacion": -0.1
+          "prom": 601200,
+          "variacion": 0.2
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
-          "prom": 278350,
-          "variacion": -0.1
+          "prom": 277700,
+          "variacion": -0.2
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
       "fuenteUrl": "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
-      "actualizado": "2026-06-04"
+      "actualizado": "2026-06-05"
     },
     {
       "id": "monedas",
@@ -309,7 +309,7 @@
           "max": null,
           "prom": 1460,
           "venta": 1460,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Dólar blue",
@@ -325,7 +325,7 @@
           "max": null,
           "prom": 1661.7608,
           "venta": 1661.7608,
-          "variacion": -0.6
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -333,20 +333,20 @@
           "max": null,
           "prom": 1633.31,
           "venta": 1633.31,
-          "variacion": -0.9
+          "variacion": 0
         },
         {
           "nombre": "Real",
           "min": null,
           "max": null,
-          "prom": 278.7721,
-          "venta": 278.7721,
-          "variacion": -1.8
+          "prom": 278.5484,
+          "venta": 278.5484,
+          "variacion": -0.1
         }
       ],
       "fuente": "dolarapi.com",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-06-05"
+      "actualizado": "2026-06-08"
     }
   ]
 }
