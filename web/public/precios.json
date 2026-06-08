@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-08T14:55:49.502Z",
+  "generado": "2026-06-08T23:58:51.339Z",
   "bloques": [
     {
       "id": "gordo",
@@ -269,28 +269,28 @@
           "min": null,
           "max": null,
           "prom": 254800,
-          "variacion": -0.3
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
           "prom": 295000,
-          "variacion": -3
+          "variacion": 0
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
           "prom": 601200,
-          "variacion": 0.2
+          "variacion": 0
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
           "prom": 277700,
-          "variacion": -0.2
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -307,40 +307,40 @@
           "nombre": "Dólar oficial",
           "min": null,
           "max": null,
-          "prom": 1460,
-          "venta": 1460,
-          "variacion": 0
+          "prom": 1465,
+          "venta": 1465,
+          "variacion": 0.3
         },
         {
           "nombre": "Dólar blue",
           "min": null,
           "max": null,
-          "prom": 1435,
-          "venta": 1435,
-          "variacion": 0
+          "prom": 1445,
+          "venta": 1445,
+          "variacion": 0.7
         },
         {
           "nombre": "Euro oficial",
           "min": null,
           "max": null,
-          "prom": 1661.7608,
-          "venta": 1661.7608,
-          "variacion": 0
+          "prom": 1671.2861,
+          "venta": 1671.2861,
+          "variacion": 0.6
         },
         {
           "nombre": "Euro blue",
           "min": null,
           "max": null,
-          "prom": 1633.31,
-          "venta": 1633.31,
-          "variacion": 0
+          "prom": 1648.47,
+          "venta": 1648.47,
+          "variacion": 0.9
         },
         {
           "nombre": "Real",
           "min": null,
           "max": null,
-          "prom": 278.5484,
-          "venta": 278.5484,
+          "prom": 278.3268,
+          "venta": 278.3268,
           "variacion": -0.1
         }
       ],
