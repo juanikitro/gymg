@@ -253,14 +253,9 @@ export default function PreciosReferencia() {
                     {esMonedas ? "Moneda" : bloque.id === "granos" ? "Producto" : "Categoría"}
                   </th>
                   {esMonedas ? (
-                    <>
-                      <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
-                        Compra
-                      </th>
-                      <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
-                        Venta
-                      </th>
-                    </>
+                    <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
+                      Cotización
+                    </th>
                   ) : (
                     <>
                       {rango && (
@@ -293,14 +288,9 @@ export default function PreciosReferencia() {
                       {c.nombre}
                     </td>
                     {esMonedas ? (
-                      <>
-                        <td className="text-right px-3 py-3.5 font-inter tabular-nums text-on-surface-variant">
-                          {fmtMoneda(c.compra)}
-                        </td>
-                        <td className="text-right px-3 py-3.5 font-inter tabular-nums font-semibold text-on-background">
-                          {fmtMoneda(c.venta)}
-                        </td>
-                      </>
+                      <td className="text-right px-3 py-3.5 font-inter tabular-nums font-semibold text-on-background">
+                        {fmtMoneda(c.venta)}
+                      </td>
                     ) : (
                       <>
                         {rango && (
@@ -332,11 +322,7 @@ export default function PreciosReferencia() {
                 <div key={c.nombre} className="px-5 py-4 flex items-center justify-between gap-3">
                   <div className="min-w-0">
                     <p className="font-merriweather text-[15px] text-on-background">{c.nombre}</p>
-                    {esMonedas ? (
-                      <p className="font-inter text-xs text-on-surface-variant mt-0.5 tabular-nums">
-                        Compra {fmtMoneda(c.compra)}
-                      </p>
-                    ) : rango ? (
+                    {!esMonedas && rango ? (
                       <p className="font-inter text-xs text-on-surface-variant mt-0.5 tabular-nums">
                         Mín {val(c.min)} · Máx {val(c.max)}
                       </p>
