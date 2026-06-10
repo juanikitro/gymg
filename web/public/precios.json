@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-10T17:51:58.122Z",
+  "generado": "2026-06-10T17:54:40.690Z",
   "bloques": [
     {
       "id": "gordo",
@@ -337,7 +337,7 @@
           "prom": 1576,
           "compra": 1554,
           "venta": 1576,
-          "variacion": -0.4
+          "variacion": 0
         },
         {
           "nombre": "Real oficial",
