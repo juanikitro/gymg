@@ -118,6 +118,7 @@ export default function PreciosReferencia() {
 
   const bloque = data.bloques.find((b) => b.id === activeId) ?? data.bloques[0];
   const esMonedas = bloque.categorias.some((c) => c.venta != null);
+  const hasCompra = esMonedas && bloque.categorias.some((c) => c.compra != null);
   const rango = !esMonedas && bloqueTieneRango(bloque);
   const indices = data.bloques
     .map((b) => b.indice)
@@ -253,9 +254,16 @@ export default function PreciosReferencia() {
                     {esMonedas ? "Moneda" : bloque.id === "granos" ? "Producto" : "Categoría"}
                   </th>
                   {esMonedas ? (
-                    <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
-                      Cotización
-                    </th>
+                    <>
+                      {hasCompra && (
+                        <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
+                          Compra
+                        </th>
+                      )}
+                      <th className="text-right font-inter text-xs font-semibold uppercase tracking-wide px-3 py-3">
+                        Venta
+                      </th>
+                    </>
                   ) : (
                     <>
                       {rango && (
@@ -288,9 +296,16 @@ export default function PreciosReferencia() {
                       {c.nombre}
                     </td>
                     {esMonedas ? (
-                      <td className="text-right px-3 py-3.5 font-inter tabular-nums font-semibold text-on-background">
-                        {fmtMoneda(c.venta)}
-                      </td>
+                      <>
+                        {hasCompra && (
+                          <td className="text-right px-3 py-3.5 font-inter tabular-nums text-on-surface-variant">
+                            {fmtMoneda(c.compra)}
+                          </td>
+                        )}
+                        <td className="text-right px-3 py-3.5 font-inter tabular-nums font-semibold text-on-background">
+                          {fmtMoneda(c.venta)}
+                        </td>
+                      </>
                     ) : (
                       <>
                         {rango && (
@@ -332,6 +347,11 @@ export default function PreciosReferencia() {
                     <p className="font-inter text-base font-semibold tabular-nums text-on-background">
                       {esMonedas ? fmtMoneda(c.venta) : val(c.prom)}
                     </p>
+                    {esMonedas && hasCompra && c.compra != null && (
+                      <p className="font-inter text-xs text-on-surface-variant tabular-nums mt-0.5">
+                        Compra {fmtMoneda(c.compra)}
+                      </p>
+                    )}
                     <Variacion v={c.variacion} />
                   </div>
                 </div>

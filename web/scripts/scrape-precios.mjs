@@ -12,7 +12,7 @@
 //    • Cría       → API pública de ROSGAN (misma URL, tipos[cría])
 //    • Gordo   → tabla HTML del Mercado Agroganadero de Cañuelas (MAG)
 //    • Granos  → pizarra de la Cámara Arbitral de Cereales (BCR Rosario)
-//    • Monedas → dolarapi.com (dólar/euro/real, sólo cotización de venta)
+//    • Monedas → dolarito.ar (dólar/euro/real, compra y venta)
 
 //
 //  Qué PRESERVA del archivo anterior (fuente inestable o protegida):
@@ -487,56 +487,194 @@ async function scrapeGranos() {
 }
 
 // ---------------------------------------------------------------------------
-//  Fuente: Monedas (dolarapi.com gratis — sólo cotización de venta)
+//  Fuente: Monedas (dolarito.ar — compra y venta)
 // ---------------------------------------------------------------------------
 
-const DOLARAPI_DOLARES = "https://dolarapi.com/v1/dolares";
-const DOLARAPI_COTIZ = "https://dolarapi.com/v1/cotizaciones";
+const DOLARITO_BASE = "https://www.dolarito.ar";
 
-const round2 = (n) => (n == null ? null : Math.round(n * 100) / 100);
+/** Extrae el __NEXT_DATA__ de una página Next.js de dolarito.ar */
+async function fetchDolaritoPage(path) {
+  const html = await fetchText(`${DOLARITO_BASE}${path}`);
+  const m = html.match(/<script[^>]*id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
+  return {
+    json: m ? (() => { try { return JSON.parse(m[1]); } catch { return null; } })() : null,
+    html,
+  };
+}
+
+/**
+ * Busca recursivamente en el JSON objetos que tengan campos compra y/o venta
+ * con valores numéricos positivos. Retorna un array de {tipo, compra, venta}.
+ */
+function deepFindCotizaciones(obj, acc = []) {
+  if (typeof obj !== "object" || obj === null) return acc;
+  if (Array.isArray(obj)) { obj.forEach((v) => deepFindCotizaciones(v, acc)); return acc; }
+
+  const lc = {};
+  for (const [k, v] of Object.entries(obj)) lc[k.toLowerCase()] = { k, v };
+
+  const compraEntry = lc["compra"];
+  const ventaEntry = lc["venta"];
+
+  if (compraEntry || ventaEntry) {
+    const compra = compraEntry ? parseFloat(compraEntry.v) : null;
+    const venta = ventaEntry ? parseFloat(ventaEntry.v) : null;
+    if (Number.isFinite(compra) || Number.isFinite(ventaEntry?.v)) {
+      const nameEntry =
+        lc["nombre"] ?? lc["tipo"] ?? lc["name"] ?? lc["casa"] ?? lc["moneda"] ?? lc["currency"];
+      acc.push({
+        tipo: nameEntry ? String(nameEntry.v).toUpperCase().trim() : null,
+        compra: Number.isFinite(compra) && compra > 0 ? compra : null,
+        venta: venta != null && Number.isFinite(venta) && venta > 0 ? venta : null,
+      });
+    }
+  }
+
+  for (const val of Object.values(obj)) deepFindCotizaciones(val, acc);
+  return acc;
+}
+
+/**
+ * Extrae compra y venta del texto plano de la página usando regex como fallback.
+ * cardTitle: "EURO OFICIAL", "DÓLAR BLUE", etc.
+ */
+function htmlFallbackCotizacion(html, cardTitle) {
+  const text = stripHtml(html).replace(/\s+/g, " ").toUpperCase();
+  const titleEsc = cardTitle.toUpperCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+  // Patrón: TITULO …(hasta 400 chars)… COMPRA … número … VENTA … número
+  let m = text.match(
+    new RegExp(`${titleEsc}[\\s\\S]{0,400}?COMPRA[\\D]{0,40}([\\d.,]+)[\\s\\S]{0,200}?VENTA[\\D]{0,40}([\\d.,]+)`)
+  );
+  if (m) return { compra: num(m[1]), venta: num(m[2]) };
+
+  // También intenta sin el orden específico (extrae los dos primeros números >= 100 tras el título)
+  m = text.match(new RegExp(`${titleEsc}[\\s\\S]{0,600}?([\\d]{2,}[\\d.,]*)[\\s\\S]{0,200}?([\\d]{2,}[\\d.,]*)`));
+  if (m) {
+    const a = num(m[1]);
+    const b = num(m[2]);
+    if (a != null && b != null && a < b) return { compra: a, venta: b };
+    if (a != null && b != null) return { compra: b, venta: a };
+  }
+
+  return null;
+}
+
+/** Obtiene compra+venta de una página con una sola moneda (dolar/oficial, dolar/blue). */
+async function getDolaritoSingle(path, logName) {
+  const { json, html } = await fetchDolaritoPage(path);
+
+  if (json) {
+    const found = deepFindCotizaciones(json).filter(
+      (r) => (r.compra != null && r.compra > 50) || (r.venta != null && r.venta > 50)
+    );
+    if (found.length > 0) {
+      console.log(`  ✓ ${logName}: compra=${found[0].compra} venta=${found[0].venta} (via __NEXT_DATA__)`);
+      return found[0];
+    }
+  }
+
+  // Fallback HTML
+  const result = htmlFallbackCotizacion(html, logName);
+  if (result) {
+    console.log(`  ✓ ${logName}: compra=${result.compra} venta=${result.venta} (via HTML fallback)`);
+    return result;
+  }
+
+  console.warn(`  ! ${logName}: no se encontraron datos en ${path}`);
+  return null;
+}
+
+/**
+ * Obtiene compra+venta de múltiples monedas en una misma página (euro-hoy, real-hoy).
+ * targets: [{key, title}] — title es el nombre de la card ("EURO OFICIAL", etc.)
+ */
+async function getDolaritoMulti(path, targets) {
+  const { json, html } = await fetchDolaritoPage(path);
+  const result = {};
+
+  if (json) {
+    const found = deepFindCotizaciones(json).filter(
+      (r) => (r.compra != null && r.compra > 5) || (r.venta != null && r.venta > 5)
+    );
+
+    for (const target of targets) {
+      // Intenta match por tipo (nombre del objeto en el JSON)
+      const tUpper = target.title.toUpperCase();
+      const match = found.find((r) => {
+        if (!r.tipo) return false;
+        // "EURO OFICIAL" está en r.tipo O r.tipo está en "EURO OFICIAL"
+        return r.tipo.includes(tUpper) || tUpper.includes(r.tipo);
+      });
+      if (match) {
+        result[target.key] = match;
+        console.log(`  ✓ ${target.title}: compra=${match.compra} venta=${match.venta} (via __NEXT_DATA__)`);
+      }
+    }
+  }
+
+  // Fallback HTML para los no encontrados
+  for (const target of targets) {
+    if (result[target.key]) continue;
+    const fallback = htmlFallbackCotizacion(html, target.title);
+    if (fallback) {
+      result[target.key] = fallback;
+      console.log(`  ✓ ${target.title}: compra=${fallback.compra} venta=${fallback.venta} (via HTML fallback)`);
+    } else {
+      console.warn(`  ! ${target.title}: no se encontraron datos en ${path}`);
+    }
+  }
+
+  return result;
+}
 
 async function scrapeMonedas(prev) {
-  const [dolares, cotiz] = await Promise.all([
-    fetchJson(DOLARAPI_DOLARES),
-    fetchJson(DOLARAPI_COTIZ),
+  const [dolarOf, dolarBl, euroData, realData] = await Promise.all([
+    getDolaritoSingle("/cotizacion/dolar/oficial", "Dólar oficial"),
+    getDolaritoSingle("/cotizacion/dolar/blue", "Dólar blue"),
+    getDolaritoMulti("/cotizacion/euro-hoy", [
+      { key: "euroOf", title: "EURO OFICIAL" },
+      { key: "euroBl", title: "EURO BLUE" },
+    ]),
+    getDolaritoMulti("/cotizacion/real-hoy", [
+      { key: "realOf", title: "REAL OFICIAL" },
+      { key: "realBl", title: "REAL BLUE" },
+    ]),
   ]);
-  const porCasa = (casa) => dolares.find((d) => d.casa === casa);
-  const porMoneda = (m) => cotiz.find((c) => c.moneda === m);
-  const oficial = porCasa("oficial");
-  const blue = porCasa("blue");
-  const eur = porMoneda("EUR");
-  const brl = porMoneda("BRL");
 
-  const cat = (nombre, venta) => ({
+  const cat = (nombre, compra, venta) => ({
     nombre,
     min: null,
     max: null,
     prom: venta ?? null,
+    compra: compra ?? null,
     venta: venta ?? null,
     variacion: null,
   });
   const prevCat = (nombre) => prev?.categorias?.find((c) => c.nombre === nombre);
 
+  const hasData = (d) => d?.compra != null || d?.venta != null;
+
   const categorias = [];
-  if (oficial?.venta != null) categorias.push(cat("Dólar oficial", oficial.venta));
-  if (blue?.venta != null) categorias.push(cat("Dólar blue", blue.venta));
-  if (eur?.venta != null) categorias.push(cat("Euro oficial", eur.venta));
+  if (hasData(dolarOf)) categorias.push(cat("Dólar oficial", dolarOf.compra, dolarOf.venta));
+  else if (prevCat("Dólar oficial")) categorias.push(prevCat("Dólar oficial"));
 
-  // Euro blue: no hay cotización directa gratis. Se deriva aplicando el EUR/USD
-  // implícito del oficial (euro oficial ÷ dólar oficial) al dólar blue, para que
-  // quede coherente con el spread blue/oficial del dólar.
-  const ratioEurUsd =
-    eur?.venta != null && oficial?.venta ? eur.venta / oficial.venta : null;
-  if (ratioEurUsd && blue?.venta != null) {
-    categorias.push(cat("Euro blue", round2(blue.venta * ratioEurUsd)));
-  } else if (prevCat("Euro blue")) {
-    categorias.push(prevCat("Euro blue"));
-    console.warn("  ! Euro blue: sin datos para derivar; uso último valor conocido.");
-  }
+  if (hasData(dolarBl)) categorias.push(cat("Dólar blue", dolarBl.compra, dolarBl.venta));
+  else if (prevCat("Dólar blue")) categorias.push(prevCat("Dólar blue"));
 
-  if (brl?.venta != null) categorias.push(cat("Real", brl.venta));
+  if (hasData(euroData?.euroOf)) categorias.push(cat("Euro oficial", euroData.euroOf.compra, euroData.euroOf.venta));
+  else if (prevCat("Euro oficial")) categorias.push(prevCat("Euro oficial"));
 
-  if (!categorias.length) throw new Error("Monedas: sin datos");
+  if (hasData(euroData?.euroBl)) categorias.push(cat("Euro blue", euroData.euroBl.compra, euroData.euroBl.venta));
+  else if (prevCat("Euro blue")) categorias.push(prevCat("Euro blue"));
+
+  if (hasData(realData?.realOf)) categorias.push(cat("Real oficial", realData.realOf.compra, realData.realOf.venta));
+  else if (prevCat("Real oficial")) categorias.push(prevCat("Real oficial"));
+
+  if (hasData(realData?.realBl)) categorias.push(cat("Real blue", realData.realBl.compra, realData.realBl.venta));
+  else if (prevCat("Real blue")) categorias.push(prevCat("Real blue"));
+
+  if (!categorias.length) throw new Error("Monedas: sin datos de dolarito.ar");
 
   console.log(`  ✓ Monedas: ${categorias.map((c) => c.nombre).join(", ")}`);
   return {
@@ -545,8 +683,8 @@ async function scrapeMonedas(prev) {
     subtitulo: "Cotizaciones de referencia",
     unidad: "en pesos (ARS)",
     categorias,
-    fuente: "dolarapi.com",
-    fuenteUrl: "https://dolarapi.com",
+    fuente: "dolarito.ar",
+    fuenteUrl: "https://www.dolarito.ar",
     actualizado: todayAR(),
   };
 }

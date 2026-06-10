@@ -315,6 +315,7 @@
           "min": null,
           "max": null,
           "prom": 1460,
+          "compra": 1450,
           "venta": 1460,
           "variacion": -0.3
         },
@@ -323,6 +324,7 @@
           "min": null,
           "max": null,
           "prom": 1460,
+          "compra": 1450,
           "venta": 1460,
           "variacion": 1
         },
@@ -331,6 +333,7 @@
           "min": null,
           "max": null,
           "prom": 1666.5165,
+          "compra": 1625,
           "venta": 1666.5165,
           "variacion": -0.3
         },
@@ -339,21 +342,32 @@
           "min": null,
           "max": null,
           "prom": 1666.52,
+          "compra": 1625,
           "venta": 1666.52,
           "variacion": 1.1
         },
         {
-          "nombre": "Real",
+          "nombre": "Real oficial",
           "min": null,
           "max": null,
           "prom": 277.703,
+          "compra": 270,
           "venta": 277.703,
           "variacion": -0.2
+        },
+        {
+          "nombre": "Real blue",
+          "min": null,
+          "max": null,
+          "prom": 270,
+          "compra": 264,
+          "venta": 270,
+          "variacion": null
         }
       ],
-      "fuente": "dolarapi.com",
-      "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-06-09"
+      "fuente": "dolarito.ar",
+      "fuenteUrl": "https://www.dolarito.ar",
+      "actualizado": "2026-06-10"
     }
   ]
 }
