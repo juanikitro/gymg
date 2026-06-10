@@ -23,7 +23,9 @@ export interface CategoriaPrecio {
   prom: number | null;
   /** Variación % vs período anterior (la calcula el scraper). `null` = sin dato. */
   variacion?: number | null;
-  /** Cotización (venta) para el bloque de monedas. En el resto va ausente. */
+  /** Cotización de compra para el bloque de monedas. En el resto va ausente. */
+  compra?: number | null;
+  /** Cotización de venta para el bloque de monedas. En el resto va ausente. */
   venta?: number | null;
 }
 
@@ -171,15 +173,16 @@ export const preciosSeed: PreciosData = {
       subtitulo: "Cotizaciones de referencia",
       unidad: "en pesos (ARS)",
       categorias: [
-        { nombre: "Dólar oficial", min: null, max: null, prom: 1450, venta: 1450, variacion: null },
-        { nombre: "Dólar blue", min: null, max: null, prom: 1435, venta: 1435, variacion: null },
-        { nombre: "Euro oficial", min: null, max: null, prom: 1660.03, venta: 1660.03, variacion: null },
-        { nombre: "Euro blue", min: null, max: null, prom: 1642.86, venta: 1642.86, variacion: null },
-        { nombre: "Real", min: null, max: null, prom: 283.94, venta: 283.94, variacion: null },
+        { nombre: "Dólar oficial", min: null, max: null, prom: 1450, compra: 1440, venta: 1450, variacion: null },
+        { nombre: "Dólar blue", min: null, max: null, prom: 1435, compra: 1425, venta: 1435, variacion: null },
+        { nombre: "Euro oficial", min: null, max: null, prom: 1660.03, compra: 1621, venta: 1660.03, variacion: null },
+        { nombre: "Euro blue", min: null, max: null, prom: 1642.86, compra: 1604, venta: 1642.86, variacion: null },
+        { nombre: "Real oficial", min: null, max: null, prom: 283.94, compra: 270, venta: 283.94, variacion: null },
+        { nombre: "Real blue", min: null, max: null, prom: 277, compra: 264, venta: 277, variacion: null },
       ],
-      fuente: "dolarapi.com",
-      fuenteUrl: "https://dolarapi.com",
-      actualizado: "2026-06-02",
+      fuente: "dolarito.ar",
+      fuenteUrl: "https://www.dolarito.ar",
+      actualizado: "2026-06-10",
     },
   ],
 };
