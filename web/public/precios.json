@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-25T14:42:21.541Z",
+  "generado": "2026-06-26T00:04:51.547Z",
   "bloques": [
     {
       "id": "gordo",
@@ -277,28 +277,28 @@
           "min": null,
           "max": null,
           "prom": 264000,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
           "prom": 294000,
-          "variacion": -1.9
+          "variacion": 0
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
           "prom": 661500,
-          "variacion": 0.5
+          "variacion": 0
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
           "prom": 279300,
-          "variacion": -0.2
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -333,10 +333,10 @@
           "nombre": "Euro oficial",
           "min": null,
           "max": null,
-          "prom": 1681.3272,
-          "compra": 1667.421,
-          "venta": 1681.3272,
-          "variacion": 0
+          "prom": 1682.7461,
+          "compra": 1668.8224,
+          "venta": 1682.7461,
+          "variacion": 0.1
         },
         {
           "nombre": "Euro blue",
@@ -351,19 +351,19 @@
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 283.4661,
-          "compra": 283.3051,
-          "venta": 283.4661,
-          "variacion": 0
+          "prom": 284.3363,
+          "compra": 284.1741,
+          "venta": 284.3363,
+          "variacion": 0.3
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 290.1,
-          "compra": 286.31,
-          "venta": 290.1,
-          "variacion": 0
+          "prom": 290.99,
+          "compra": 287.19,
+          "venta": 290.99,
+          "variacion": 0.3
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
