@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-06T15:43:24.822Z",
+  "generado": "2026-07-07T00:00:44.533Z",
   "bloques": [
     {
       "id": "gordo",
@@ -276,7 +276,7 @@
           "min": null,
           "max": null,
           "prom": 265000,
-          "variacion": 0.2
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
@@ -297,7 +297,7 @@
           "min": null,
           "max": null,
           "prom": 273710,
-          "variacion": -2.6
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -323,19 +323,19 @@
           "nombre": "Dólar blue",
           "min": null,
           "max": null,
-          "prom": 1510,
-          "compra": 1490,
-          "venta": 1510,
-          "variacion": 0
+          "prom": 1515,
+          "compra": 1495,
+          "venta": 1515,
+          "variacion": 0.3
         },
         {
           "nombre": "Euro oficial",
           "min": null,
           "max": null,
-          "prom": 1704.7791,
-          "compra": 1690.7726,
-          "venta": 1704.7791,
-          "variacion": 0
+          "prom": 1702.1912,
+          "compra": 1688.1915,
+          "venta": 1702.1912,
+          "variacion": -0.2
         },
         {
           "nombre": "Euro blue",
@@ -344,25 +344,25 @@
           "prom": 1644,
           "compra": 1609,
           "venta": 1644,
-          "variacion": -0.2
+          "variacion": 0
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 287.2486,
-          "compra": 287.0846,
-          "venta": 287.2486,
-          "variacion": 0.1
+          "prom": 288.5794,
+          "compra": 288.4132,
+          "venta": 288.5794,
+          "variacion": 0.5
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 287.25,
-          "compra": 283.44,
-          "venta": 287.25,
-          "variacion": 0.1
+          "prom": 289.53,
+          "compra": 285.71,
+          "venta": 289.53,
+          "variacion": 0.8
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
