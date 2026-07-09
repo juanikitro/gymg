@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-09T00:02:19.168Z",
+  "generado": "2026-07-09T15:20:40.233Z",
   "bloques": [
     {
       "id": "gordo",
@@ -317,7 +317,7 @@
           "prom": 1510,
           "compra": 1460,
           "venta": 1510,
-          "variacion": -0.3
+          "variacion": 0
         },
         {
           "nombre": "Dólar blue",
@@ -326,7 +326,7 @@
           "prom": 1510,
           "compra": 1490,
           "venta": 1510,
-          "variacion": -0.3
+          "variacion": 0
         },
         {
           "nombre": "Euro oficial",
@@ -335,7 +335,7 @@
           "prom": 1702.4208,
           "compra": 1688.4264,
           "venta": 1702.4208,
-          "variacion": -0.3
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -353,7 +353,7 @@
           "prom": 288.3122,
           "compra": 288.1466,
           "venta": 288.3122,
-          "variacion": -0.4
+          "variacion": 0
         },
         {
           "nombre": "Real blue",
@@ -362,12 +362,12 @@
           "prom": 288.31,
           "compra": 284.49,
           "venta": 288.31,
-          "variacion": -0.4
+          "variacion": 0
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-07-08"
+      "actualizado": "2026-07-09"
     }
   ]
 }
