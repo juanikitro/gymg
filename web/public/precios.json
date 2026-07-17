@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-16T23:52:32.603Z",
+  "generado": "2026-07-17T13:48:27.068Z",
   "bloques": [
     {
       "id": "gordo",
@@ -16,155 +16,155 @@
       "categorias": [
         {
           "nombre": "Novillo EyB 431-460",
-          "min": 4100,
-          "max": 4750,
-          "prom": 4544.822,
-          "variacion": 0.4
+          "min": 3700,
+          "max": 4850,
+          "prom": 4446.132,
+          "variacion": -2.2
         },
         {
           "nombre": "Novillo EyB 461-490",
           "min": 4000,
-          "max": 4650,
-          "prom": 4531.28,
-          "variacion": -1.1
+          "max": 4850,
+          "prom": 4551.705,
+          "variacion": 0.5
         },
         {
           "nombre": "Novillo EyB 491-520",
-          "min": 3300,
+          "min": 3800,
           "max": 4700,
-          "prom": 4346.928,
-          "variacion": 0.2
+          "prom": 4437.152,
+          "variacion": 2.1
         },
         {
           "nombre": "Novillo EyB +520",
-          "min": 3400,
+          "min": 3100,
           "max": 4700,
-          "prom": 4122.567,
-          "variacion": 1.6
+          "prom": 4221.938,
+          "variacion": 2.4
         },
         {
           "nombre": "Novillo liviano",
-          "min": 4000,
+          "min": 3800,
           "max": 4600,
-          "prom": 4079.952,
-          "variacion": 0
+          "prom": 4274.258,
+          "variacion": 4.8
         },
         {
           "nombre": "Novillo pesado",
           "min": 3000,
-          "max": 4000,
-          "prom": 3420.42,
-          "variacion": 0
+          "max": 4400,
+          "prom": 3655.788,
+          "variacion": 6.9
         },
         {
           "nombre": "Novillo overo",
-          "min": 3500,
-          "max": 4100,
-          "prom": 3719.776,
-          "variacion": -0.5
+          "min": 2400,
+          "max": 4500,
+          "prom": 3735.372,
+          "variacion": 0.4
         },
         {
           "nombre": "Novillito EyB liviano",
-          "min": 3500,
-          "max": 5400,
-          "prom": 4719.404,
-          "variacion": -0.5
+          "min": 4100,
+          "max": 5600,
+          "prom": 4965.24,
+          "variacion": 5.2
         },
         {
           "nombre": "Novillito EyB pesado",
-          "min": 3500,
-          "max": 5000,
-          "prom": 4391.696,
-          "variacion": 0.9
+          "min": 3850,
+          "max": 5100,
+          "prom": 4681.288,
+          "variacion": 6.6
         },
         {
           "nombre": "Novillito",
-          "min": 3800,
-          "max": 4800,
-          "prom": 4012.991,
-          "variacion": 0
+          "min": 3000,
+          "max": 4500,
+          "prom": 3955.972,
+          "variacion": -1.4
         },
         {
           "nombre": "Vaquillona EyB liviana",
-          "min": 3450,
-          "max": 5400,
-          "prom": 4697.28,
-          "variacion": 0
+          "min": 2900,
+          "max": 5500,
+          "prom": 4613.324,
+          "variacion": -1.8
         },
         {
           "nombre": "Vaquillona EyB pesada",
-          "min": 2500,
-          "max": 4760,
-          "prom": 4063.404,
-          "variacion": 0
+          "min": 2200,
+          "max": 4700,
+          "prom": 3928.769,
+          "variacion": -3.3
         },
         {
           "nombre": "Vaquillona",
-          "min": 4100,
-          "max": 4700,
-          "prom": 4171.549,
-          "variacion": 0
+          "min": 2500,
+          "max": 5000,
+          "prom": 3613.503,
+          "variacion": -13.4
         },
         {
           "nombre": "Vaca buena",
-          "min": 1750,
-          "max": 4020,
-          "prom": 3093.321,
-          "variacion": -0.4
+          "min": 1900,
+          "max": 3600,
+          "prom": 3033.586,
+          "variacion": -1.9
         },
         {
           "nombre": "Vaca regular",
           "min": 2000,
           "max": 3600,
-          "prom": 2606.196,
-          "variacion": 0.1
+          "prom": 2678.683,
+          "variacion": 2.8
         },
         {
           "nombre": "Vaca conserva",
-          "min": 1750,
-          "max": 2700,
-          "prom": 2219.927,
-          "variacion": 0
+          "min": 2000,
+          "max": 2800,
+          "prom": 2250.163,
+          "variacion": 1.4
         },
         {
           "nombre": "Vaca conserva inferior",
-          "min": 1700,
-          "max": 4300,
-          "prom": 1947.068,
-          "variacion": 0
+          "min": 1500,
+          "max": 4800,
+          "prom": 2178.553,
+          "variacion": 11.9
         },
         {
           "nombre": "Toro",
-          "min": 2050,
-          "max": 3800,
-          "prom": 2841.708,
-          "variacion": 0.2
+          "min": 3250,
+          "max": 3500,
+          "prom": 2941.058,
+          "variacion": 3.5
         },
         {
           "nombre": "Toro regular",
-          "min": 1900,
+          "min": 2200,
           "max": 3400,
-          "prom": 2689.373,
-          "variacion": 0
+          "prom": 2607.605,
+          "variacion": -3
         },
         {
           "nombre": "MEJ EyB",
-          "min": 3700,
-          "max": 5000,
-          "prom": 4162.962,
-          "variacion": 0.1
+          "min": 3350,
+          "max": 4670,
+          "prom": 3909.49,
+          "variacion": -6.1
         },
         {
           "nombre": "MEJ regular",
-          "min": 2600,
-          "max": 4300,
-          "prom": 3254.286,
-          "variacion": 0
+          "min": 2300,
+          "max": 2300,
+          "prom": 2300,
+          "variacion": -29.3
         }
       ],
       "fuente": "Mercado Agroganadero de Cañuelas (MAG)",
       "fuenteUrl": "https://www.mercadoagroganadero.com.ar",
-      "actualizado": "2026-07-15"
+      "actualizado": "2026-07-17"
     },
     {
       "id": "invernada",
@@ -268,41 +268,41 @@
           "nombre": "Soja",
           "min": null,
           "max": null,
-          "prom": 488000,
-          "variacion": 0
+          "prom": 490000,
+          "variacion": 0.4
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
-          "prom": 266700,
-          "variacion": 0
+          "prom": 267000,
+          "variacion": 0.1
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
-          "prom": 285800,
-          "variacion": 0
+          "prom": 286065,
+          "variacion": 0.1
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
-          "prom": 659475,
-          "variacion": 0
+          "prom": 660150,
+          "variacion": 0.1
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
-          "prom": 263790,
-          "variacion": 0
+          "prom": 264060,
+          "variacion": 0.1
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
       "fuenteUrl": "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
-      "actualizado": "2026-07-15"
+      "actualizado": "2026-07-16"
     },
     {
       "id": "monedas",
@@ -335,7 +335,7 @@
           "prom": 1690.3152,
           "compra": 1676.3409,
           "venta": 1690.3152,
-          "variacion": -0.7
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -344,7 +344,7 @@
           "prom": 1658,
           "compra": 1622,
           "venta": 1658,
-          "variacion": -0.3
+          "variacion": 0
         },
         {
           "nombre": "Real oficial",
@@ -353,7 +353,7 @@
           "prom": 288.4254,
           "compra": 288.2584,
           "venta": 288.4254,
-          "variacion": -0.5
+          "variacion": 0
         },
         {
           "nombre": "Real blue",
@@ -362,12 +362,12 @@
           "prom": 294.21,
           "compra": 290.35,
           "venta": 294.21,
-          "variacion": -0.5
+          "variacion": 0
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-07-16"
+      "actualizado": "2026-07-17"
     }
   ]
 }
