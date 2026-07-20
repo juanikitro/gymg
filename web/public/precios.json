@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-17T23:44:23.291Z",
+  "generado": "2026-07-20T14:17:53.807Z",
   "bloques": [
     {
       "id": "gordo",
@@ -268,41 +268,41 @@
           "nombre": "Soja",
           "min": null,
           "max": null,
-          "prom": 490000,
-          "variacion": 0
+          "prom": 495000,
+          "variacion": 1
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
-          "prom": 267000,
-          "variacion": 0
+          "prom": 271765,
+          "variacion": 1.8
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
-          "prom": 286065,
-          "variacion": 0
+          "prom": 293800,
+          "variacion": 2.7
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
-          "prom": 660150,
-          "variacion": 0
+          "prom": 661050,
+          "variacion": 0.1
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
-          "prom": 264060,
-          "variacion": 0
+          "prom": 264420,
+          "variacion": 0.1
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
       "fuenteUrl": "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
-      "actualizado": "2026-07-16"
+      "actualizado": "2026-07-17"
     },
     {
       "id": "monedas",
@@ -317,7 +317,7 @@
           "prom": 1500,
           "compra": 1450,
           "venta": 1500,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Dólar blue",
@@ -326,7 +326,7 @@
           "prom": 1530,
           "compra": 1510,
           "venta": 1530,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Euro oficial",
@@ -335,7 +335,7 @@
           "prom": 1692.31,
           "compra": 1678.3325,
           "venta": 1692.31,
-          "variacion": 0.1
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -344,7 +344,7 @@
           "prom": 1663,
           "compra": 1627,
           "venta": 1663,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Real oficial",
@@ -367,7 +367,7 @@
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-07-17"
+      "actualizado": "2026-07-20"
     }
   ]
 }
