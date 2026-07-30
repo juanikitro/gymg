@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-30T14:13:06.671Z",
+  "generado": "2026-07-30T23:55:32.640Z",
   "bloques": [
     {
       "id": "gordo",
@@ -174,9 +174,9 @@
       "indice": {
         "sigla": "PIRI",
         "nombre": "Precio Índice ROSGAN Invernada",
-        "valor": 5214.71,
+        "valor": 0,
         "unidad": "$/kg",
-        "variacion": 0
+        "variacion": -100
       },
       "categorias": [
         {
@@ -231,7 +231,7 @@
       ],
       "fuente": "ROSGAN — Mercado Ganadero (último remate)",
       "fuenteUrl": "https://www.rosgan.com.ar/indices",
-      "actualizado": "2026-06-23"
+      "actualizado": "2026-07-24"
     },
     {
       "id": "cria",
@@ -256,7 +256,8 @@
       ],
       "fuente": "ROSGAN — Mercado Ganadero (último remate)",
       "fuenteUrl": "https://www.rosgan.com.ar/indices",
-      "actualizado": "2026-06-23"
+      "actualizado": "2026-07-24",
+      "provisorio": true
     },
     {
       "id": "granos",
@@ -269,35 +270,35 @@
           "min": null,
           "max": null,
           "prom": 505000,
-          "variacion": -0.1
+          "variacion": 0
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
           "prom": 281000,
-          "variacion": -0.5
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
           "prom": 307800,
-          "variacion": 0.8
+          "variacion": 0
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
           "prom": 698900,
-          "variacion": -0.1
+          "variacion": 0
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
           "prom": 267660,
-          "variacion": 0.4
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -314,55 +315,55 @@
           "nombre": "Dólar oficial",
           "min": null,
           "max": null,
-          "prom": 1515,
-          "compra": 1465,
-          "venta": 1515,
-          "variacion": 0
+          "prom": 1510,
+          "compra": 1460,
+          "venta": 1510,
+          "variacion": -0.3
         },
         {
           "nombre": "Dólar blue",
           "min": null,
           "max": null,
-          "prom": 1570,
-          "compra": 1550,
-          "venta": 1570,
-          "variacion": 0
+          "prom": 1565,
+          "compra": 1545,
+          "venta": 1565,
+          "variacion": -0.3
         },
         {
           "nombre": "Euro oficial",
           "min": null,
           "max": null,
-          "prom": 1711.7232,
-          "compra": 1697.7079,
-          "venta": 1711.7232,
-          "variacion": 0
+          "prom": 1717.896,
+          "compra": 1703.808,
+          "venta": 1717.896,
+          "variacion": 0.4
         },
         {
           "nombre": "Euro blue",
           "min": null,
           "max": null,
-          "prom": 1707,
-          "compra": 1670,
-          "venta": 1707,
-          "variacion": 0
+          "prom": 1701,
+          "compra": 1665,
+          "venta": 1701,
+          "variacion": -0.4
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 292.9472,
-          "compra": 292.7766,
-          "venta": 292.9472,
-          "variacion": 0.3
+          "prom": 293.0521,
+          "compra": 292.8811,
+          "venta": 293.0521,
+          "variacion": 0
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 303.58,
-          "compra": 299.71,
-          "venta": 303.58,
-          "variacion": 0.3
+          "prom": 303.73,
+          "compra": 299.84,
+          "venta": 303.73,
+          "variacion": 0
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
