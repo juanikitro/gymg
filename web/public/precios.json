@@ -1,5 +1,5 @@
 {
-  "generado": "2026-08-17T12:52:28.827Z",
+  "generado": "2026-08-17T23:15:05.038Z",
   "bloques": [
     {
       "id": "gordo",
@@ -176,7 +176,7 @@
         "nombre": "Precio Índice ROSGAN Invernada",
         "valor": 0,
         "unidad": "$/kg",
-        "variacion": -100
+        "variacion": null
       },
       "categorias": [
         {
