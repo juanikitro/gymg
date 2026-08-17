@@ -1,5 +1,5 @@
 {
-  "generado": "2026-08-14T23:14:05.132Z",
+  "generado": "2026-08-17T12:52:28.827Z",
   "bloques": [
     {
       "id": "gordo",
@@ -174,9 +174,9 @@
       "indice": {
         "sigla": "PIRI",
         "nombre": "Precio Índice ROSGAN Invernada",
-        "valor": 5709.16,
+        "valor": 0,
         "unidad": "$/kg",
-        "variacion": 0
+        "variacion": -100
       },
       "categorias": [
         {
@@ -238,7 +238,7 @@
       ],
       "fuente": "ROSGAN — Mercado Ganadero (último remate)",
       "fuenteUrl": "https://www.rosgan.com.ar/indices",
-      "actualizado": "2026-07-24"
+      "actualizado": "2026-08-14"
     },
     {
       "id": "cria",
@@ -270,7 +270,8 @@
       ],
       "fuente": "ROSGAN — Mercado Ganadero (último remate)",
       "fuenteUrl": "https://www.rosgan.com.ar/indices",
-      "actualizado": "2026-07-24"
+      "actualizado": "2026-08-14",
+      "provisorio": true
     },
     {
       "id": "granos",
@@ -331,7 +332,7 @@
           "prom": 1510,
           "compra": 1460,
           "venta": 1510,
-          "variacion": -0.3
+          "variacion": 0
         },
         {
           "nombre": "Dólar blue",
@@ -340,7 +341,7 @@
           "prom": 1545,
           "compra": 1525,
           "venta": 1545,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Euro oficial",
@@ -358,7 +359,7 @@
           "prom": 1679,
           "compra": 1643,
           "venta": 1679,
-          "variacion": 0.5
+          "variacion": 0
         },
         {
           "nombre": "Real oficial",
@@ -367,7 +368,7 @@
           "prom": 285.1033,
           "compra": 284.9415,
           "venta": 285.1033,
-          "variacion": -0.5
+          "variacion": 0
         },
         {
           "nombre": "Real blue",
@@ -376,12 +377,12 @@
           "prom": 291.71,
           "compra": 287.94,
           "venta": 291.71,
-          "variacion": 0.1
+          "variacion": 0
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-08-14"
+      "actualizado": "2026-08-17"
     }
   ]
 }
