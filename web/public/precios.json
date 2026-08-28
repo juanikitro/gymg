@@ -1,5 +1,5 @@
 {
-  "generado": "2026-08-27T22:03:15.306Z",
+  "generado": "2026-08-28T06:26:35.874Z",
   "bloques": [
     {
       "id": "gordo",
@@ -262,35 +262,35 @@
           "min": null,
           "max": null,
           "prom": 540000,
-          "variacion": 1.9
+          "variacion": 0
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
           "prom": 270500,
-          "variacion": 0.6
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
           "prom": 343000,
-          "variacion": 1.4
+          "variacion": 0
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
           "prom": 752500,
-          "variacion": 1.2
+          "variacion": 0
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
           "prom": 276900,
-          "variacion": -0.4
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -328,7 +328,7 @@
           "prom": 1763.2944,
           "compra": 1749.0411,
           "venta": 1763.2944,
-          "variacion": -0.2
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -346,7 +346,7 @@
           "prom": 292.9941,
           "compra": 292.8259,
           "venta": 292.9941,
-          "variacion": -0.3
+          "variacion": 0
         },
         {
           "nombre": "Real blue",
@@ -355,12 +355,12 @@
           "prom": 296.81,
           "compra": 292.99,
           "venta": 296.81,
-          "variacion": -0.3
+          "variacion": 0
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-08-27"
+      "actualizado": "2026-08-28"
     }
   ]
 }
