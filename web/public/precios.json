@@ -1,5 +1,5 @@
 {
-  "generado": "2026-08-28T22:00:08.527Z",
+  "generado": "2026-08-29T03:58:22.420Z",
   "bloques": [
     {
       "id": "gordo",
@@ -276,21 +276,21 @@
           "min": null,
           "max": null,
           "prom": 356200,
-          "variacion": 3.8
+          "variacion": 0
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
           "prom": 751500,
-          "variacion": -0.1
+          "variacion": 0
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
           "prom": 275000,
-          "variacion": -0.7
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -328,7 +328,7 @@
           "prom": 1753.164,
           "compra": 1738.971,
           "venta": 1753.164,
-          "variacion": -0.6
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -346,7 +346,7 @@
           "prom": 291.1537,
           "compra": 290.9877,
           "venta": 291.1537,
-          "variacion": -0.6
+          "variacion": 0
         },
         {
           "nombre": "Real blue",
@@ -355,12 +355,12 @@
           "prom": 294.95,
           "compra": 291.15,
           "venta": 294.95,
-          "variacion": -0.6
+          "variacion": 0
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-08-28"
+      "actualizado": "2026-08-29"
     }
   ]
 }
