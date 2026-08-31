@@ -1,5 +1,5 @@
 {
-  "generado": "2026-08-29T03:58:22.420Z",
+  "generado": "2026-08-31T18:59:04.164Z",
   "bloques": [
     {
       "id": "gordo",
@@ -261,22 +261,22 @@
           "nombre": "Soja",
           "min": null,
           "max": null,
-          "prom": 540000,
-          "variacion": 0
+          "prom": 550000,
+          "variacion": 1.9
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
-          "prom": 270500,
-          "variacion": 0
+          "prom": 271300,
+          "variacion": 0.3
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
-          "prom": 356200,
-          "variacion": 0
+          "prom": 357714,
+          "variacion": 0.4
         },
         {
           "nombre": "Girasol",
@@ -289,13 +289,13 @@
           "nombre": "Sorgo",
           "min": null,
           "max": null,
-          "prom": 275000,
-          "variacion": 0
+          "prom": 273546,
+          "variacion": -0.5
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
       "fuenteUrl": "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
-      "actualizado": "2026-08-27"
+      "actualizado": "2026-08-28"
     },
     {
       "id": "monedas",
@@ -307,10 +307,10 @@
           "nombre": "Dólar oficial",
           "min": null,
           "max": null,
-          "prom": 1535,
-          "compra": 1485,
-          "venta": 1535,
-          "variacion": 0
+          "prom": 1530,
+          "compra": 1480,
+          "venta": 1530,
+          "variacion": -0.3
         },
         {
           "nombre": "Dólar blue",
@@ -334,33 +334,33 @@
           "nombre": "Euro blue",
           "min": null,
           "max": null,
-          "prom": 1690,
-          "compra": 1654,
-          "venta": 1690,
-          "variacion": 0
+          "prom": 1693,
+          "compra": 1657,
+          "venta": 1693,
+          "variacion": 0.2
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 291.1537,
-          "compra": 290.9877,
-          "venta": 291.1537,
+          "prom": 291.0618,
+          "compra": 290.8954,
+          "venta": 291.0618,
           "variacion": 0
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 294.95,
-          "compra": 291.15,
-          "venta": 294.95,
-          "variacion": 0
+          "prom": 295.82,
+          "compra": 292.01,
+          "venta": 295.82,
+          "variacion": 0.3
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-08-29"
+      "actualizado": "2026-08-31"
     }
   ]
 }
