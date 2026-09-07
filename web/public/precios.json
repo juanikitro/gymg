@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-05T00:30:27.082Z",
+  "generado": "2026-09-07T17:35:25.533Z",
   "bloques": [
     {
       "id": "gordo",
@@ -268,8 +268,8 @@
           "nombre": "Maíz",
           "min": null,
           "max": null,
-          "prom": 285560,
-          "variacion": 0
+          "prom": 289000,
+          "variacion": 1.2
         },
         {
           "nombre": "Trigo",
@@ -295,7 +295,7 @@
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
       "fuenteUrl": "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
-      "actualizado": "2026-09-03"
+      "actualizado": "2026-09-04"
     },
     {
       "id": "monedas",
@@ -328,7 +328,7 @@
           "prom": 1753.3516,
           "compra": 1739.1398,
           "venta": 1753.3516,
-          "variacion": -0.2
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -337,30 +337,30 @@
           "prom": 1674,
           "compra": 1638,
           "venta": 1674,
-          "variacion": -0.2
+          "variacion": 0
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 296.9052,
-          "compra": 296.7322,
-          "venta": 296.9052,
-          "variacion": 0
+          "prom": 294.8164,
+          "compra": 294.646,
+          "venta": 294.8164,
+          "variacion": -0.7
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 298.85,
-          "compra": 294.96,
-          "venta": 298.85,
-          "variacion": 0
+          "prom": 296.74,
+          "compra": 292.89,
+          "venta": 296.74,
+          "variacion": -0.7
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-09-04"
+      "actualizado": "2026-09-07"
     }
   ]
 }
