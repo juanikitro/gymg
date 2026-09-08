@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-07T17:35:25.533Z",
+  "generado": "2026-09-08T00:50:17.959Z",
   "bloques": [
     {
       "id": "gordo",
@@ -269,7 +269,7 @@
           "min": null,
           "max": null,
           "prom": 289000,
-          "variacion": 1.2
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
@@ -316,46 +316,46 @@
           "nombre": "Dólar blue",
           "min": null,
           "max": null,
-          "prom": 1540,
-          "compra": 1520,
-          "venta": 1540,
-          "variacion": 0
+          "prom": 1545,
+          "compra": 1525,
+          "venta": 1545,
+          "variacion": 0.3
         },
         {
           "nombre": "Euro oficial",
           "min": null,
           "max": null,
-          "prom": 1753.3516,
-          "compra": 1739.1398,
-          "venta": 1753.3516,
-          "variacion": 0
+          "prom": 1759.386,
+          "compra": 1745.1538,
+          "venta": 1759.386,
+          "variacion": 0.3
         },
         {
           "nombre": "Euro blue",
           "min": null,
           "max": null,
-          "prom": 1674,
-          "compra": 1638,
-          "venta": 1674,
-          "variacion": 0
+          "prom": 1679,
+          "compra": 1643,
+          "venta": 1679,
+          "variacion": 0.3
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 294.8164,
-          "compra": 294.646,
-          "venta": 294.8164,
-          "variacion": -0.7
+          "prom": 294.9404,
+          "compra": 294.7698,
+          "venta": 294.9404,
+          "variacion": 0
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 296.74,
-          "compra": 292.89,
-          "venta": 296.74,
-          "variacion": -0.7
+          "prom": 297.83,
+          "compra": 293.98,
+          "venta": 297.83,
+          "variacion": 0.4
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
