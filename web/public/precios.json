@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-21T18:04:21.338Z",
+  "generado": "2026-09-22T01:22:14.760Z",
   "bloques": [
     {
       "id": "gordo",
@@ -262,35 +262,35 @@
           "min": null,
           "max": null,
           "prom": 558000,
-          "variacion": -0.4
+          "variacion": 0
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
           "prom": 295100,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
           "prom": 346250,
-          "variacion": 0.4
+          "variacion": 0
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
           "prom": 760200,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
           "prom": 286000,
-          "variacion": 0.4
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -325,10 +325,10 @@
           "nombre": "Euro oficial",
           "min": null,
           "max": null,
-          "prom": 1740.9178,
-          "compra": 1726.8085,
-          "venta": 1740.9178,
-          "variacion": 0
+          "prom": 1738.2234,
+          "compra": 1724.128,
+          "venta": 1738.2234,
+          "variacion": -0.2
         },
         {
           "nombre": "Euro blue",
@@ -343,19 +343,19 @@
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 296.6241,
-          "compra": 296.4519,
-          "venta": 296.6241,
-          "variacion": 0.7
+          "prom": 296.6314,
+          "compra": 296.4592,
+          "venta": 296.6314,
+          "variacion": 0
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 299.52,
-          "compra": 295.66,
-          "venta": 299.52,
-          "variacion": 0.7
+          "prom": 299.53,
+          "compra": 295.67,
+          "venta": 299.53,
+          "variacion": 0
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
