@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-30T01:46:02.835Z",
+  "generado": "2026-09-30T17:50:25.329Z",
   "bloques": [
     {
       "id": "gordo",
@@ -16,155 +16,155 @@
       "categorias": [
         {
           "nombre": "Novillo EyB 431-460",
-          "min": 4000,
-          "max": 4720,
-          "prom": 4402.089,
-          "variacion": 0
+          "min": 3600,
+          "max": 4700,
+          "prom": 4049.396,
+          "variacion": -8
         },
         {
           "nombre": "Novillo EyB 461-490",
-          "min": 3500,
+          "min": 3600,
           "max": 4500,
-          "prom": 4106.03,
-          "variacion": 0
+          "prom": 4130.283,
+          "variacion": 0.6
         },
         {
           "nombre": "Novillo EyB 491-520",
-          "min": 4000,
-          "max": 4450,
-          "prom": 4342.3,
-          "variacion": 0
+          "min": 4300,
+          "max": 4300,
+          "prom": 4300,
+          "variacion": -1
         },
         {
           "nombre": "Novillo EyB +520",
-          "min": 3800,
+          "min": 4500,
           "max": 4500,
-          "prom": 4243.882,
-          "variacion": 0
+          "prom": 4488.6,
+          "variacion": 5.8
         },
         {
           "nombre": "Novillo liviano",
-          "min": 3400,
-          "max": 3400,
-          "prom": 3400,
-          "variacion": 0
+          "min": 4000,
+          "max": 4200,
+          "prom": 4038.286,
+          "variacion": 18.8
         },
         {
           "nombre": "Novillo pesado",
           "min": 3800,
-          "max": 4100,
-          "prom": 3917.32,
-          "variacion": 0
+          "max": 3900,
+          "prom": 3861.468,
+          "variacion": -1.4
         },
         {
           "nombre": "Novillo overo",
-          "min": 4100,
-          "max": 4100,
-          "prom": 3660.39,
-          "variacion": 0
+          "min": 3800,
+          "max": 3800,
+          "prom": 3800,
+          "variacion": 3.8
         },
         {
           "nombre": "Novillito EyB liviano",
-          "min": 4300,
-          "max": 5220,
-          "prom": 4866.884,
-          "variacion": 0
+          "min": 3800,
+          "max": 5100,
+          "prom": 4597.919,
+          "variacion": -5.5
         },
         {
           "nombre": "Novillito EyB pesado",
-          "min": 4070,
-          "max": 5000,
-          "prom": 4536.162,
-          "variacion": 0
+          "min": 3600,
+          "max": 4900,
+          "prom": 4308.315,
+          "variacion": -5
         },
         {
           "nombre": "Novillito",
-          "min": 4100,
+          "min": 4250,
           "max": 4500,
-          "prom": 4030.493,
-          "variacion": 0
+          "prom": 4339.955,
+          "variacion": 7.7
         },
         {
           "nombre": "Vaquillona EyB liviana",
-          "min": 3000,
-          "max": 5200,
-          "prom": 4582.901,
-          "variacion": 0
+          "min": 3600,
+          "max": 5050,
+          "prom": 4533.582,
+          "variacion": -1.1
         },
         {
           "nombre": "Vaquillona EyB pesada",
-          "min": 2500,
-          "max": 4400,
-          "prom": 4035.613,
-          "variacion": 0
+          "min": 3000,
+          "max": 4200,
+          "prom": 3763.645,
+          "variacion": -6.7
         },
         {
           "nombre": "Vaquillona",
-          "min": 3000,
-          "max": 4850,
-          "prom": 3905.52,
-          "variacion": 0
+          "min": 3400,
+          "max": 4800,
+          "prom": 3834.222,
+          "variacion": -1.8
         },
         {
           "nombre": "Vaca buena",
-          "min": 2900,
-          "max": 4220,
-          "prom": 3511.226,
-          "variacion": 0
+          "min": 3200,
+          "max": 3800,
+          "prom": 3446.787,
+          "variacion": -1.8
         },
         {
           "nombre": "Vaca regular",
-          "min": 2500,
-          "max": 3700,
-          "prom": 3067.242,
-          "variacion": 0
+          "min": 2700,
+          "max": 3650,
+          "prom": 3021.985,
+          "variacion": -1.5
         },
         {
           "nombre": "Vaca conserva",
-          "min": 2700,
-          "max": 2900,
-          "prom": 2751.772,
-          "variacion": 0
+          "min": 2800,
+          "max": 2800,
+          "prom": 2634.602,
+          "variacion": -4.3
         },
         {
           "nombre": "Vaca conserva inferior",
-          "min": 2000,
-          "max": 2800,
-          "prom": 2510.331,
-          "variacion": 0
+          "min": 2020,
+          "max": 2400,
+          "prom": 2066.777,
+          "variacion": -17.7
         },
         {
           "nombre": "Toro",
-          "min": 3000,
-          "max": 4060,
-          "prom": 3557.46,
-          "variacion": 0
+          "min": 2800,
+          "max": 4020,
+          "prom": 3425.755,
+          "variacion": -3.7
         },
         {
           "nombre": "Toro regular",
-          "min": 3600,
-          "max": 3600,
-          "prom": 3070.849,
-          "variacion": 0
+          "min": 2800,
+          "max": 4000,
+          "prom": 2937.245,
+          "variacion": -4.4
         },
         {
           "nombre": "MEJ EyB",
-          "min": 4500,
-          "max": 5000,
-          "prom": 4300.833,
+          "min": 4740,
+          "max": 4740,
+          "prom": 4301.923,
           "variacion": 0
         },
         {
           "nombre": "MEJ regular",
-          "min": 3000,
-          "max": 3100,
-          "prom": 3075.391,
-          "variacion": 0
+          "min": 3300,
+          "max": 3300,
+          "prom": 3266.667,
+          "variacion": 6.2
         }
       ],
       "fuente": "Mercado Agroganadero de Cañuelas (MAG)",
       "fuenteUrl": "https://www.mercadoagroganadero.com.ar",
-      "actualizado": "2026-09-29"
+      "actualizado": "2026-09-30"
     },
     {
       "id": "invernada",
@@ -261,41 +261,41 @@
           "nombre": "Soja",
           "min": null,
           "max": null,
-          "prom": 555000,
-          "variacion": 0
+          "prom": 560000,
+          "variacion": 0.9
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
-          "prom": 291750,
-          "variacion": 0
+          "prom": 295800,
+          "variacion": 1.4
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
-          "prom": 347050,
-          "variacion": 0
+          "prom": 346500,
+          "variacion": -0.2
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
-          "prom": 765300,
-          "variacion": 0
+          "prom": 764065,
+          "variacion": -0.2
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
-          "prom": 287950,
-          "variacion": 0
+          "prom": 295000,
+          "variacion": 2.4
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
       "fuenteUrl": "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
-      "actualizado": "2026-09-28"
+      "actualizado": "2026-09-29"
     },
     {
       "id": "monedas",
@@ -307,10 +307,10 @@
           "nombre": "Dólar oficial",
           "min": null,
           "max": null,
-          "prom": 1545,
-          "compra": 1495,
-          "venta": 1545,
-          "variacion": 0
+          "prom": 1540,
+          "compra": 1490,
+          "venta": 1540,
+          "variacion": -0.3
         },
         {
           "nombre": "Dólar blue",
@@ -319,7 +319,7 @@
           "prom": 1560,
           "compra": 1540,
           "venta": 1560,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Euro oficial",
@@ -328,7 +328,7 @@
           "prom": 1726.4046,
           "compra": 1712.4134,
           "venta": 1726.4046,
-          "variacion": -0.6
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -337,30 +337,30 @@
           "prom": 1696,
           "compra": 1659,
           "venta": 1696,
-          "variacion": 0.4
+          "variacion": 0
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 292.33,
-          "compra": 292.1638,
-          "venta": 292.33,
-          "variacion": 0.3
+          "prom": 294.33,
+          "compra": 294.1616,
+          "venta": 294.33,
+          "variacion": 0.7
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 295.17,
-          "compra": 291.38,
-          "venta": 295.17,
-          "variacion": 0.6
+          "prom": 298.15,
+          "compra": 294.33,
+          "venta": 298.15,
+          "variacion": 1
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-09-29"
+      "actualizado": "2026-09-30"
     }
   ]
 }
