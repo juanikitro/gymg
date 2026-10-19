@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-17T00:55:12.572Z",
+  "generado": "2026-10-19T18:33:45.744Z",
   "bloques": [
     {
       "id": "gordo",
@@ -261,41 +261,41 @@
           "nombre": "Soja",
           "min": null,
           "max": null,
-          "prom": 560000,
-          "variacion": 0
+          "prom": 552000,
+          "variacion": -1.4
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
-          "prom": 286500,
-          "variacion": 0
+          "prom": 285000,
+          "variacion": -0.5
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
-          "prom": 350450,
-          "variacion": 0
+          "prom": 353000,
+          "variacion": 0.7
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
-          "prom": 797120,
-          "variacion": 0
+          "prom": 799770,
+          "variacion": 0.3
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
-          "prom": 293280,
-          "variacion": 0
+          "prom": 286710,
+          "variacion": -2.2
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
       "fuenteUrl": "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
-      "actualizado": "2026-10-15"
+      "actualizado": "2026-10-16"
     },
     {
       "id": "monedas",
@@ -307,19 +307,19 @@
           "nombre": "Dólar oficial",
           "min": null,
           "max": null,
-          "prom": 1535,
-          "compra": 1485,
-          "venta": 1535,
+          "prom": 1540,
+          "compra": 1490,
+          "venta": 1540,
           "variacion": 0.3
         },
         {
           "nombre": "Dólar blue",
           "min": null,
           "max": null,
-          "prom": 1555,
-          "compra": 1535,
-          "venta": 1555,
-          "variacion": 0.6
+          "prom": 1560,
+          "compra": 1540,
+          "venta": 1560,
+          "variacion": 0.3
         },
         {
           "nombre": "Euro oficial",
@@ -328,39 +328,39 @@
           "prom": 1706.6874,
           "compra": 1692.7962,
           "venta": 1706.6874,
-          "variacion": 0.4
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
           "min": null,
           "max": null,
-          "prom": 1690,
-          "compra": 1654,
-          "venta": 1690,
-          "variacion": 0.7
+          "prom": 1693,
+          "compra": 1657,
+          "venta": 1693,
+          "variacion": 0.2
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 299.2402,
-          "compra": 299.0652,
-          "venta": 299.2402,
-          "variacion": 0.5
+          "prom": 301.3399,
+          "compra": 301.1633,
+          "venta": 301.3399,
+          "variacion": 0.7
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 303.14,
-          "compra": 299.24,
-          "venta": 303.14,
-          "variacion": 0.9
+          "prom": 305.25,
+          "compra": 301.34,
+          "venta": 305.25,
+          "variacion": 0.7
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-10-16"
+      "actualizado": "2026-10-19"
     }
   ]
 }
