@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-19T18:33:45.744Z",
+  "generado": "2026-10-20T01:23:27.353Z",
   "bloques": [
     {
       "id": "gordo",
@@ -262,35 +262,35 @@
           "min": null,
           "max": null,
           "prom": 552000,
-          "variacion": -1.4
+          "variacion": 0
         },
         {
           "nombre": "Maíz",
           "min": null,
           "max": null,
           "prom": 285000,
-          "variacion": -0.5
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
           "prom": 353000,
-          "variacion": 0.7
+          "variacion": 0
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
           "prom": 799770,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Sorgo",
           "min": null,
           "max": null,
           "prom": 286710,
-          "variacion": -2.2
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -310,7 +310,7 @@
           "prom": 1540,
           "compra": 1490,
           "venta": 1540,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Dólar blue",
@@ -319,43 +319,43 @@
           "prom": 1560,
           "compra": 1540,
           "venta": 1560,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Euro oficial",
           "min": null,
           "max": null,
-          "prom": 1706.6874,
-          "compra": 1692.7962,
-          "venta": 1706.6874,
-          "variacion": 0
+          "prom": 1712.166,
+          "compra": 1698.2693,
+          "venta": 1712.166,
+          "variacion": 0.3
         },
         {
           "nombre": "Euro blue",
           "min": null,
           "max": null,
-          "prom": 1693,
-          "compra": 1657,
-          "venta": 1693,
+          "prom": 1696,
+          "compra": 1659,
+          "venta": 1696,
           "variacion": 0.2
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 301.3399,
-          "compra": 301.1633,
-          "venta": 301.3399,
-          "variacion": 0.7
+          "prom": 302.0978,
+          "compra": 301.9202,
+          "venta": 302.0978,
+          "variacion": 0.3
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 305.25,
-          "compra": 301.34,
-          "venta": 305.25,
-          "variacion": 0.7
+          "prom": 306.02,
+          "compra": 302.1,
+          "venta": 306.02,
+          "variacion": 0.3
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
