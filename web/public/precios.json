@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-29T02:01:05.670Z",
+  "generado": "2026-10-29T18:16:30.003Z",
   "bloques": [
     {
       "id": "gordo",
@@ -268,22 +268,22 @@
           "nombre": "Maíz",
           "min": null,
           "max": null,
-          "prom": 280500,
-          "variacion": 0
+          "prom": 277800,
+          "variacion": -1
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
-          "prom": 323000,
-          "variacion": 0
+          "prom": 317300,
+          "variacion": -1.8
         },
         {
           "nombre": "Girasol",
           "min": null,
           "max": null,
-          "prom": 810370,
-          "variacion": 0
+          "prom": 812490,
+          "variacion": 0.3
         },
         {
           "nombre": "Sorgo",
@@ -295,7 +295,7 @@
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
       "fuenteUrl": "https://www.cac.bcr.com.ar/es/precios-de-pizarra",
-      "actualizado": "2026-10-27"
+      "actualizado": "2026-10-28"
     },
     {
       "id": "monedas",
@@ -328,7 +328,7 @@
           "prom": 1719.0216,
           "compra": 1705.1559,
           "venta": 1719.0216,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -343,24 +343,24 @@
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 287.9601,
-          "compra": 287.8007,
-          "venta": 287.9601,
-          "variacion": 0.7
+          "prom": 284.2049,
+          "compra": 284.0495,
+          "venta": 284.2049,
+          "variacion": -1.3
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 288.88,
-          "compra": 285.19,
-          "venta": 288.88,
-          "variacion": 0.7
+          "prom": 285.12,
+          "compra": 281.47,
+          "venta": 285.12,
+          "variacion": -1.3
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-10-28"
+      "actualizado": "2026-10-29"
     }
   ]
 }
