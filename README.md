@@ -56,11 +56,18 @@ web/
 │   ├── components/       # Secciones de la landing (Hero, TrustBar, Process,
 │   │                     # Operations, Zones, Contact, Footer, ThemeToggle, etc.)
 │   └── hooks/            # useTheme (dark mode), useFadeInUp (animaciones)
-├── public/              # Imágenes, favicon y .htaccess (reglas para Apache)
+├── public/              # Imágenes, video del hero (hero-bg.mp4), favicon y .htaccess (reglas para Apache)
 ├── next.config.ts       # output: "export" → genera web/out/
 ├── DEPLOY.md            # Guía de deploy a Donweb
 └── package.json
 ```
+
+### Video del hero
+
+`HeroSection` muestra `public/hero-bg.png` como imagen base y, encima, `HeroVideo` reproduce `public/hero-bg.mp4` en loop **solo si el dispositivo no pide reducir movimiento** (`prefers-reduced-motion`). Con movimiento reducido el video ni se descarga y queda la imagen fija.
+
+- El MP4 se generó desde el clip original con un **cross fade de 1 s** entre el final y el inicio (loop sin corte), sin audio, H.264 CRF 26 con `faststart` (~1.85 MB).
+- La velocidad se ajusta en código con `PLAYBACK_RATE` (0.8) en `HeroVideo.tsx`, sin re-encodear.
 
 ### `stitch_export/` — prototipos de diseño
 

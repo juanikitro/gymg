@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HeroVideo from "./HeroVideo";
 
 export default function HeroSection() {
   return (
@@ -12,6 +13,7 @@ export default function HeroSection() {
           className="object-cover"
           priority
         />
+        <HeroVideo />
         <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-black/10" />
       </div>
 
