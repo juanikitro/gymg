@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-14T02:49:19.596Z",
+  "generado": "2026-11-14T12:34:57.752Z",
   "bloques": [
     {
       "id": "gordo",
@@ -330,30 +330,30 @@
           "prom": 1707,
           "compra": 1670,
           "venta": 1707,
-          "variacion": -0.1
+          "variacion": 0
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 272.7764,
-          "compra": 272.775,
-          "venta": 272.7764,
-          "variacion": -0.2
+          "prom": 272.8568,
+          "compra": 272.714,
+          "venta": 272.8568,
+          "variacion": 0
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 273.65,
-          "compra": 270.17,
-          "venta": 273.65,
-          "variacion": -0.2
+          "prom": 273.73,
+          "compra": 270.25,
+          "venta": 273.73,
+          "variacion": 0
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-11-13"
+      "actualizado": "2026-11-14"
     }
   ]
 }
