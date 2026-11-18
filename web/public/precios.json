@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-17T20:40:02.184Z",
+  "generado": "2026-11-18T03:58:40.786Z",
   "bloques": [
     {
       "id": "gordo",
@@ -269,14 +269,14 @@
           "min": null,
           "max": null,
           "prom": 271400,
-          "variacion": 0.8
+          "variacion": 0
         },
         {
           "nombre": "Trigo",
           "min": null,
           "max": null,
           "prom": 285270,
-          "variacion": 0.4
+          "variacion": 0
         },
         {
           "nombre": "Girasol",
@@ -290,7 +290,7 @@
           "min": null,
           "max": null,
           "prom": 277600,
-          "variacion": 0.5
+          "variacion": 0
         }
       ],
       "fuente": "Cámara Arbitral de Cereales — BCR (Rosario)",
@@ -319,7 +319,7 @@
           "prom": 1605,
           "compra": 1585,
           "venta": 1605,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Euro oficial",
@@ -328,7 +328,7 @@
           "prom": 1712.7872,
           "compra": 1698.9973,
           "venta": 1712.7872,
-          "variacion": 0.2
+          "variacion": 0
         },
         {
           "nombre": "Euro blue",
@@ -337,30 +337,30 @@
           "prom": 1745,
           "compra": 1708,
           "venta": 1745,
-          "variacion": 0.3
+          "variacion": 0
         },
         {
           "nombre": "Real oficial",
           "min": null,
           "max": null,
-          "prom": 268.5407,
-          "compra": 268.4031,
-          "venta": 268.5407,
-          "variacion": 0.2
+          "prom": 268.8485,
+          "compra": 268.7107,
+          "venta": 268.8485,
+          "variacion": 0.1
         },
         {
           "nombre": "Real blue",
           "min": null,
           "max": null,
-          "prom": 273.66,
-          "compra": 270.25,
-          "venta": 273.66,
-          "variacion": 0.5
+          "prom": 273.97,
+          "compra": 270.56,
+          "venta": 273.97,
+          "variacion": 0.1
         }
       ],
       "fuente": "dolarapi.com · bluelytics.com.ar",
       "fuenteUrl": "https://dolarapi.com",
-      "actualizado": "2026-11-17"
+      "actualizado": "2026-11-18"
     }
   ]
 }
